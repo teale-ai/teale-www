@@ -508,6 +508,65 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
 
+    .api-section { background: var(--gray-900); color: var(--white); }
+    .api-section .section-header p { color: var(--gray-400); }
+
+    .api-demo {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--gray-800);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .api-demo .comment { color: var(--gray-400); }
+    .api-demo .keyword { color: #c084fc; }
+    .api-demo .string { color: var(--teal-light); }
+    .api-demo .url { color: #facc15; }
+
+    .api-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .api-step {
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .api-step .num {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(13,148,136,0.2);
+      color: var(--teal-light);
+      font-weight: 700;
+      font-size: 0.85rem;
+      line-height: 32px;
+      margin-bottom: 0.75rem;
+    }
+    .api-step h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .api-step p {
+      color: var(--gray-400);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .api-steps { grid-template-columns: 1fr; }
+    }
+
     footer {
       padding: 3rem 2rem;
       text-align: center;
@@ -540,6 +599,7 @@
       <a href="#how-it-works">How It Works</a>
       <a href="#pricing">Pricing</a>
       <a href="#earnings">Earn</a>
+      <a href="#api">API</a>
       <a href="#download" class="btn btn-primary">Download</a>
     </div>
   </nav>
@@ -695,6 +755,39 @@
           <div class="amount">$60</div>
           <div class="period">per month</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="api" class="api-section">
+    <div class="section-center">
+      <div class="section-header">
+        <h2>For developers: just use the API</h2>
+        <p>No app needed. Send USDC, get an API key, swap one line of code. OpenAI-compatible — works with any existing client.</p>
+      </div>
+      <div class="api-steps">
+        <div class="api-step">
+          <div class="num">1</div>
+          <h4>Send USDC</h4>
+          <p>Deposit any amount of USDC on Base L2 to the network address. No signup, no KYC.</p>
+        </div>
+        <div class="api-step">
+          <div class="num">2</div>
+          <h4>Get API Key</h4>
+          <p>One API call with your wallet address. Instant key, balance auto-credited.</p>
+        </div>
+        <div class="api-step">
+          <div class="num">3</div>
+          <h4>Start Building</h4>
+          <p>Drop-in replacement for OpenAI. Change the base URL, keep everything else.</p>
+        </div>
+      </div>
+      <div class="api-demo">
+        <span class="comment"># Just change the base URL</span><br>
+        <span class="keyword">curl</span> <span class="url">https://api.teale.com/v1/chat/completions</span> \<br>
+        &nbsp;&nbsp;-H <span class="string">"Authorization: Bearer sk-teale-..."</span> \<br>
+        &nbsp;&nbsp;-H <span class="string">"Content-Type: application/json"</span> \<br>
+        &nbsp;&nbsp;-d <span class="string">'{"model": "llama-3.1-8b", "messages": [{"role": "user", "content": "Hello"}]}'</span>
       </div>
     </div>
   </section>
