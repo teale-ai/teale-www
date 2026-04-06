@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teale — Make Money While You Sleep</title>
-  <meta name="description" content="Turn your idle Apple devices into an AI inference network. Earn money while you sleep. Run AI at a fraction of the cost of OpenAI and Anthropic.">
-  <meta property="og:title" content="Teale — Make Money While You Sleep">
-  <meta property="og:description" content="Turn your idle Apple devices into an AI inference network. AI inference at a fraction of the cost of cloud APIs.">
+  <title>Teale — Instant AI Compute, 100x Cheaper</title>
+  <meta name="description" content="AI inference at 1/100th the cost of OpenAI. No account needed — deposit USDC, get an API key, start building. Powered by idle Apple Silicon.">
+  <meta property="og:title" content="Teale — Instant AI Compute, 100x Cheaper">
+  <meta property="og:description" content="AI inference at 1/100th the cost of OpenAI. No account, no signup. Just USDC and an API key.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://teale.com">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍃</text></svg>">
@@ -21,7 +21,6 @@
       --gray-800: #1e293b;
       --gray-700: #334155;
       --gray-400: #94a3b8;
-      --gray-300: #cbd5e1;
       --white: #ffffff;
     }
 
@@ -81,10 +80,7 @@
       cursor: pointer;
       border: none;
     }
-    .btn-primary {
-      background: var(--teal);
-      color: var(--white);
-    }
+    .btn-primary { background: var(--teal); color: var(--white); }
     .btn-primary:hover {
       background: var(--teal-dark);
       transform: translateY(-1px);
@@ -96,12 +92,27 @@
       border: 1px solid var(--teal-100);
     }
     .btn-secondary:hover { background: var(--teal-100); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+    .btn-outline:hover {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.1);
+    }
     .btn-large {
       padding: 1rem 2.5rem;
       font-size: 1.1rem;
       border-radius: 14px;
     }
+    .btn-white { background: var(--white); color: var(--teal-dark); }
+    .btn-white:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
 
+    /* Hero */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -112,6 +123,8 @@
       padding: 8rem 2rem 4rem;
       position: relative;
       overflow: hidden;
+      background: var(--gray-900);
+      color: var(--white);
     }
 
     .hero::before {
@@ -121,29 +134,31 @@
       left: -20%;
       width: 140%;
       height: 140%;
-      background: radial-gradient(ellipse at 30% 20%, rgba(13,148,136,0.08) 0%, transparent 60%),
-                  radial-gradient(ellipse at 70% 60%, rgba(20,184,166,0.06) 0%, transparent 50%);
-      z-index: -1;
+      background: radial-gradient(ellipse at 30% 20%, rgba(13,148,136,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 60%, rgba(20,184,166,0.1) 0%, transparent 50%);
+      z-index: 0;
     }
+
+    .hero > * { position: relative; z-index: 1; }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.5rem 1rem;
-      background: var(--teal-50);
-      border: 1px solid var(--teal-100);
+      background: rgba(13,148,136,0.15);
+      border: 1px solid rgba(13,148,136,0.3);
       border-radius: 100px;
       font-size: 0.85rem;
       font-weight: 500;
-      color: var(--teal-dark);
+      color: var(--teal-light);
       margin-bottom: 2rem;
     }
 
     .hero-badge .dot {
       width: 8px;
       height: 8px;
-      background: var(--teal);
+      background: var(--teal-light);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
@@ -158,21 +173,21 @@
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.03em;
-      max-width: 800px;
+      max-width: 900px;
       margin-bottom: 1.5rem;
     }
 
     .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--teal), var(--teal-light));
+      background: linear-gradient(135deg, var(--teal-light), #5eead4);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .hero p {
+    .hero p.subtitle {
       font-size: clamp(1.1rem, 2vw, 1.35rem);
-      color: var(--gray-700);
-      max-width: 580px;
+      color: var(--gray-400);
+      max-width: 620px;
       line-height: 1.6;
       margin-bottom: 2.5rem;
     }
@@ -182,73 +197,82 @@
       gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
+      margin-bottom: 4rem;
     }
 
-    .hero-visual {
-      margin-top: 4rem;
+    /* Hero terminal */
+    .hero-terminal {
       width: 100%;
-      max-width: 720px;
+      max-width: 700px;
+      text-align: left;
     }
 
-    .device-mockup {
-      background: var(--gray-900);
-      border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.1) inset;
+    .terminal {
+      background: var(--gray-800);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4);
     }
 
-    .mockup-bar {
+    .terminal-bar {
       display: flex;
+      align-items: center;
       gap: 6px;
-      margin-bottom: 1rem;
+      padding: 12px 16px;
+      background: rgba(0,0,0,0.2);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .mockup-bar span {
+    .terminal-bar span {
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: var(--gray-700);
     }
-
-    .mockup-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .mockup-stat {
-      background: var(--gray-800);
-      border-radius: 10px;
-      padding: 1.2rem;
-    }
-    .mockup-stat .label {
+    .terminal-bar span:nth-child(1) { background: #ff5f57; }
+    .terminal-bar span:nth-child(2) { background: #febc2e; }
+    .terminal-bar span:nth-child(3) { background: #28c840; }
+    .terminal-bar .title {
+      flex: 1;
+      text-align: center;
       font-size: 0.75rem;
       color: var(--gray-400);
+      font-weight: 500;
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.85rem;
+      line-height: 2;
+      color: var(--gray-400);
+    }
+
+    .terminal-body .prompt { color: var(--teal-light); }
+    .terminal-body .cmd { color: var(--white); }
+    .terminal-body .flag { color: #c084fc; }
+    .terminal-body .string { color: #fbbf24; }
+    .terminal-body .comment { color: #64748b; }
+    .terminal-body .output { color: var(--teal-light); }
+    .terminal-body .dim { color: #475569; }
+
+    .terminal-step {
+      margin-bottom: 1.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .terminal-step:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+    .terminal-step .step-label {
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.4rem;
-    }
-    .mockup-stat .value {
-      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      color: var(--teal);
       font-weight: 700;
-      color: var(--white);
+      margin-bottom: 0.5rem;
+      font-family: -apple-system, system-ui, sans-serif;
     }
-    .mockup-stat .value.teal { color: var(--teal-light); }
 
-    .mockup-stat .bar-track {
-      height: 4px;
-      background: var(--gray-700);
-      border-radius: 2px;
-      margin-top: 0.5rem;
-      overflow: hidden;
-    }
-    .mockup-stat .bar-fill {
-      height: 100%;
-      background: var(--teal);
-      border-radius: 2px;
-      animation: fillBar 2s ease-out forwards;
-    }
-    @keyframes fillBar { from { width: 0; } }
-
+    /* Sections */
     section { padding: 6rem 2rem; }
 
     .section-center {
@@ -274,81 +298,98 @@
       line-height: 1.6;
     }
 
-    /* Cost comparison */
-    .cost-section { background: var(--teal-50); }
-
-    .cost-comparison {
+    /* Speed stats */
+    .speed-stats {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 2rem;
-      align-items: center;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
       max-width: 800px;
-      margin: 0 auto;
+      margin: 0 auto 4rem;
     }
 
-    .cost-card {
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
+    .speed-stat {
       text-align: center;
+      padding: 2rem 1rem;
+      border-radius: 16px;
+      background: var(--teal-50);
+      border: 1px solid var(--teal-100);
     }
 
-    .cost-card.cloud {
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-
-    .cost-card.teale {
-      background: var(--gray-900);
-      color: var(--white);
-      box-shadow: 0 20px 40px rgba(13,148,136,0.2);
-    }
-
-    .cost-card .provider {
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 1rem;
-    }
-    .cost-card.cloud .provider { color: var(--gray-400); }
-    .cost-card.teale .provider { color: var(--teal-light); }
-
-    .cost-card .price {
+    .speed-stat .big {
       font-size: 2.5rem;
       font-weight: 800;
+      color: var(--teal);
       line-height: 1;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
     }
-    .cost-card.cloud .price { color: var(--gray-900); }
-    .cost-card.teale .price { color: var(--teal-light); }
-
-    .cost-card .unit {
-      font-size: 0.85rem;
-      margin-bottom: 1.2rem;
-    }
-    .cost-card.cloud .unit { color: var(--gray-400); }
-    .cost-card.teale .unit { color: var(--gray-400); }
-
-    .cost-card .models {
-      font-size: 0.85rem;
-      line-height: 1.6;
-    }
-    .cost-card.cloud .models { color: var(--gray-700); }
-    .cost-card.teale .models { color: var(--gray-400); }
-
-    .cost-vs {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gray-400);
-      text-align: center;
-    }
-
-    .cost-footnote {
-      text-align: center;
-      margin-top: 2rem;
+    .speed-stat .label {
       font-size: 0.9rem;
       color: var(--gray-700);
     }
+
+    /* Comparison */
+    .compare-section { background: var(--teal-50); }
+
+    .compare-table {
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--teal-100);
+    }
+
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--teal-100);
+    }
+    .compare-row:last-child { border-bottom: none; }
+
+    .compare-row.header {
+      background: var(--gray-900);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .compare-cell {
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .compare-row:not(.header) .compare-cell:first-child {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .compare-row:not(.header) {
+      background: var(--white);
+    }
+    .compare-row:not(.header):nth-child(odd) {
+      background: rgba(255,255,255,0.6);
+    }
+
+    .compare-cell.winner {
+      color: var(--teal-dark);
+      font-weight: 700;
+    }
+
+    .compare-cell .tag {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: var(--teal);
+      color: var(--white);
+      margin-left: 0.5rem;
+    }
+
+    /* How it works (earn side) */
+    .earn-section { background: var(--gray-900); color: var(--white); }
+    .earn-section .section-header p { color: var(--gray-400); }
 
     .steps {
       display: grid;
@@ -365,14 +406,14 @@
       width: 56px;
       height: 56px;
       border-radius: 16px;
-      background: var(--teal-50);
-      border: 2px solid var(--teal-100);
+      background: rgba(13,148,136,0.15);
+      border: 2px solid rgba(13,148,136,0.3);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       font-size: 1.3rem;
       font-weight: 800;
-      color: var(--teal);
+      color: var(--teal-light);
       margin-bottom: 1.5rem;
     }
 
@@ -383,13 +424,61 @@
     }
 
     .step p {
-      color: var(--gray-700);
+      color: var(--gray-400);
       line-height: 1.6;
     }
 
-    .features-section { background: var(--gray-900); color: var(--white); }
-    .features-section .section-header p { color: var(--gray-400); }
+    .earnings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
 
+    .earning-card {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .earning-card:hover {
+      border-color: var(--teal);
+      box-shadow: 0 4px 20px rgba(13,148,136,0.15);
+    }
+
+    .earning-card .device {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .earning-card .chip {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+    .earning-card .ram {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      margin-bottom: 1.5rem;
+    }
+    .earning-card .amount {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--teal-light);
+      line-height: 1;
+    }
+    .earning-card .period {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+      margin-top: 0.25rem;
+    }
+
+    /* Features */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -397,19 +486,18 @@
     }
 
     .feature-card {
-      background: var(--gray-800);
+      border: 1px solid rgba(0,0,0,0.08);
       border-radius: 16px;
       padding: 2rem;
-      border: 1px solid rgba(255,255,255,0.06);
       transition: border-color 0.2s;
     }
-    .feature-card:hover { border-color: rgba(13,148,136,0.3); }
+    .feature-card:hover { border-color: var(--teal); }
 
     .feature-icon {
       width: 44px;
       height: 44px;
       border-radius: 12px;
-      background: rgba(13,148,136,0.15);
+      background: var(--teal-50);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -424,59 +512,12 @@
     }
 
     .feature-card p {
-      color: var(--gray-400);
+      color: var(--gray-700);
       line-height: 1.6;
       font-size: 0.95rem;
     }
 
-    .earnings-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .earning-card {
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 16px;
-      padding: 2rem;
-      text-align: center;
-      transition: all 0.2s;
-    }
-    .earning-card:hover {
-      border-color: var(--teal);
-      box-shadow: 0 4px 20px rgba(13,148,136,0.1);
-    }
-
-    .earning-card .device {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--gray-400);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-    .earning-card .chip {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-    .earning-card .ram {
-      font-size: 0.9rem;
-      color: var(--gray-700);
-      margin-bottom: 1.5rem;
-    }
-    .earning-card .amount {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--teal);
-      line-height: 1;
-    }
-    .earning-card .period {
-      font-size: 0.9rem;
-      color: var(--gray-700);
-      margin-top: 0.25rem;
-    }
-
+    /* CTA */
     .cta-section {
       background: linear-gradient(135deg, var(--teal-dark), var(--teal));
       color: var(--white);
@@ -494,77 +535,16 @@
     .cta-section p {
       font-size: 1.15rem;
       opacity: 0.9;
-      max-width: 480px;
+      max-width: 500px;
       margin: 0 auto 2rem;
       line-height: 1.6;
     }
 
-    .btn-white {
-      background: var(--white);
-      color: var(--teal-dark);
-    }
-    .btn-white:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-
-    .api-section { background: var(--gray-900); color: var(--white); }
-    .api-section .section-header p { color: var(--gray-400); }
-
-    .api-demo {
-      max-width: 640px;
-      margin: 0 auto;
-      background: var(--gray-800);
-      border-radius: 16px;
-      padding: 2rem;
-      border: 1px solid rgba(255,255,255,0.06);
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 0.85rem;
-      line-height: 1.8;
-      overflow-x: auto;
-    }
-
-    .api-demo .comment { color: var(--gray-400); }
-    .api-demo .keyword { color: #c084fc; }
-    .api-demo .string { color: var(--teal-light); }
-    .api-demo .url { color: #facc15; }
-
-    .api-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .api-step {
-      text-align: center;
-      padding: 1.5rem 1rem;
-    }
-    .api-step .num {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(13,148,136,0.2);
-      color: var(--teal-light);
-      font-weight: 700;
-      font-size: 0.85rem;
-      line-height: 32px;
-      margin-bottom: 0.75rem;
-    }
-    .api-step h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-    }
-    .api-step p {
-      color: var(--gray-400);
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 768px) {
-      .api-steps { grid-template-columns: 1fr; }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     footer {
@@ -579,15 +559,17 @@
       .steps { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
       .earnings-grid { grid-template-columns: 1fr; }
-      .mockup-content { grid-template-columns: 1fr; }
-      .cost-comparison { grid-template-columns: 1fr; gap: 1rem; }
-      .cost-vs { display: none; }
+      .speed-stats { grid-template-columns: 1fr; }
+      .compare-row { grid-template-columns: 1fr; }
+      .compare-row.header { display: none; }
+      .compare-cell { padding: 0.75rem 1.5rem; }
       section { padding: 4rem 1.5rem; }
     }
 
     @media (max-width: 480px) {
       .hero { padding: 6rem 1.5rem 3rem; }
       .hero-ctas { flex-direction: column; align-items: center; }
+      .cta-buttons { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
@@ -596,142 +578,151 @@
   <nav>
     <a href="/" class="logo">teale</a>
     <div class="nav-links">
-      <a href="#how-it-works">How It Works</a>
       <a href="#pricing">Pricing</a>
-      <a href="#earnings">Earn</a>
-      <a href="#api">API</a>
-      <a href="#download" class="btn btn-primary">Download</a>
+      <a href="#earn">Earn</a>
+      <a href="#features">Features</a>
+      <a href="#api" class="btn btn-primary">Get API Key</a>
     </div>
   </nav>
 
+  <!-- Hero: Lead with instant compute -->
   <section class="hero">
     <div class="hero-badge">
       <span class="dot"></span>
-      Now available for macOS
+      Live now &mdash; no waitlist
     </div>
-    <h1>Make money<br><span class="highlight">while you sleep.</span></h1>
-    <p>Your Mac has a powerful AI chip sitting idle most of the day. Teale turns it into a passive income stream &mdash; and gives developers AI inference at a fraction of the cost of cloud APIs.</p>
+    <h1>AI compute in<br><span class="highlight">30 seconds.</span></h1>
+    <p class="subtitle">No account. No credit card. No approval process. Send USDC, get an API key, start running inference. OpenAI-compatible. Up to 100x cheaper.</p>
     <div class="hero-ctas">
-      <a href="#download" class="btn btn-primary btn-large">Download for Mac</a>
-      <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works</a>
+      <a href="#api" class="btn btn-primary btn-large">Get Your API Key</a>
+      <a href="#earn" class="btn btn-outline btn-large">Earn With Your Mac</a>
     </div>
 
-    <div class="hero-visual">
-      <div class="device-mockup">
-        <div class="mockup-bar"><span></span><span></span><span></span></div>
-        <div class="mockup-content">
-          <div class="mockup-stat">
-            <div class="label">Earned Today</div>
-            <div class="value teal">$4.82</div>
-            <div class="bar-track"><div class="bar-fill" style="width:65%"></div></div>
+    <div class="hero-terminal">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span></span><span></span><span></span>
+          <div class="title">Terminal</div>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-step">
+            <div class="step-label">Step 1 &mdash; Get your key (one time)</div>
+            <span class="prompt">$</span> <span class="cmd">curl</span> <span class="flag">-X POST</span> <span class="string">https://api.teale.com/v1/keys/create</span> \<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-d</span> <span class="string">'{"wallet_address": "0xYOUR_WALLET"}'</span><br>
+            <br>
+            <span class="output">{"api_key": "sk-teale-a1b2c3...", "message": "Send USDC to fund your account"}</span>
           </div>
-          <div class="mockup-stat">
-            <div class="label">Requests Served</div>
-            <div class="value">1,247</div>
-            <div class="bar-track"><div class="bar-fill" style="width:80%"></div></div>
+
+          <div class="terminal-step">
+            <div class="step-label">Step 2 &mdash; Fund with USDC on Base (any amount)</div>
+            <span class="dim"># Send USDC to the deposit address from your wallet.</span><br>
+            <span class="dim"># $1 = 20 million tokens. Balance credited in ~15 seconds.</span>
           </div>
-          <div class="mockup-stat">
-            <div class="label">GPU Utilization</div>
-            <div class="value">42%</div>
-            <div class="bar-track"><div class="bar-fill" style="width:42%"></div></div>
-          </div>
-          <div class="mockup-stat">
-            <div class="label">Network Status</div>
-            <div class="value teal">Online</div>
-            <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+
+          <div class="terminal-step">
+            <div class="step-label">Step 3 &mdash; Use it (drop-in OpenAI replacement)</div>
+            <span class="prompt">$</span> <span class="cmd">curl</span> <span class="string">https://api.teale.com/v1/chat/completions</span> \<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-H</span> <span class="string">"Authorization: Bearer sk-teale-a1b2c3..."</span> \<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-d</span> <span class="string">'{"model": "llama-3.1-8b", "messages": [{"role": "user", "content": "Hello"}]}'</span><br>
+            <br>
+            <span class="output">{"choices": [{"message": {"content": "Hello! How can I help you today?"}}]}</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="pricing" class="cost-section">
+  <!-- Speed stats -->
+  <section>
     <div class="section-center">
-      <div class="section-header">
-        <h2>AI inference, radically cheaper</h2>
-        <p>Cloud AI APIs charge a premium for GPU time. Teale runs on idle Macs that are already paid for &mdash; so inference costs a fraction of the price.</p>
-      </div>
-      <div class="cost-comparison">
-        <div class="cost-card cloud">
-          <div class="provider">Cloud APIs</div>
-          <div class="price">$2&ndash;15</div>
-          <div class="unit">per 1M tokens</div>
-          <div class="models">GPT-4o, Claude Sonnet, etc.<br>Billed per token, adds up fast</div>
+      <div class="speed-stats">
+        <div class="speed-stat">
+          <div class="big">30s</div>
+          <div class="label">From zero to API key</div>
         </div>
-        <div class="cost-vs">vs</div>
-        <div class="cost-card teale">
-          <div class="provider">Teale Network</div>
-          <div class="price">$0.05</div>
-          <div class="unit">per 1M tokens</div>
-          <div class="models">Llama, Qwen, Mistral, Gemma<br>Open models, same quality tasks</div>
+        <div class="speed-stat">
+          <div class="big">$0.05</div>
+          <div class="label">Per 1M tokens</div>
+        </div>
+        <div class="speed-stat">
+          <div class="big">0</div>
+          <div class="label">Signups required</div>
         </div>
       </div>
-      <p class="cost-footnote">Up to 100x cheaper. Powered by millions of idle Apple Silicon chips instead of rented data center GPUs.</p>
     </div>
   </section>
 
-  <section id="how-it-works">
+  <!-- Pricing comparison -->
+  <section id="pricing" class="compare-section">
     <div class="section-center">
       <div class="section-header">
-        <h2>Three steps to passive income</h2>
-        <p>Install the app, let it run in the background, and watch your earnings grow.</p>
+        <h2>100x cheaper than cloud APIs</h2>
+        <p>Same quality open models. Fraction of the cost. No vendor lock-in.</p>
+      </div>
+      <div class="compare-table">
+        <div class="compare-row header">
+          <div class="compare-cell"></div>
+          <div class="compare-cell">Cloud APIs</div>
+          <div class="compare-cell">Teale</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Cost per 1M tokens</div>
+          <div class="compare-cell">$2 &ndash; $15</div>
+          <div class="compare-cell winner">$0.05 <span class="tag">100x</span></div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Signup required</div>
+          <div class="compare-cell">Email, credit card, approval</div>
+          <div class="compare-cell winner">No. Just a wallet.</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Time to first request</div>
+          <div class="compare-cell">Minutes to days</div>
+          <div class="compare-cell winner">30 seconds</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Payment</div>
+          <div class="compare-cell">Credit card, invoicing</div>
+          <div class="compare-cell winner">USDC on Base L2</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">API format</div>
+          <div class="compare-cell">OpenAI-compatible</div>
+          <div class="compare-cell winner">OpenAI-compatible</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell">Models</div>
+          <div class="compare-cell">GPT-4o, Claude, etc.</div>
+          <div class="compare-cell">Llama, Qwen, Mistral, Gemma</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Earn section -->
+  <section id="earn" class="earn-section">
+    <div class="section-center">
+      <div class="section-header">
+        <h2>Have a Mac? Make money while you sleep.</h2>
+        <p>Your Mac's AI chip sits idle most of the day. Install Teale and it earns you money by serving inference requests when you're not using it.</p>
       </div>
       <div class="steps">
         <div class="step">
           <div class="step-number">1</div>
           <h3>Install Teale</h3>
-          <p>A lightweight macOS app that lives in your menu bar. No configuration needed &mdash; it detects your hardware automatically.</p>
+          <p>Lightweight menu bar app. No configuration &mdash; it detects your hardware automatically.</p>
         </div>
         <div class="step">
           <div class="step-number">2</div>
           <h3>Leave It Running</h3>
-          <p>Teale only uses your Mac when you're not. Smart throttling adapts to your activity, thermals, and battery level.</p>
+          <p>Smart throttling only uses your Mac when you're idle. Respects thermals, battery, and activity.</p>
         </div>
         <div class="step">
           <div class="step-number">3</div>
           <h3>Get Paid</h3>
-          <p>Earn for every AI inference request your Mac handles. More powerful hardware earns more, automatically.</p>
+          <p>Earn for every request served. More RAM and faster chips earn more, automatically.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="features" class="features-section">
-    <div class="section-center">
-      <div class="section-header">
-        <h2>Built for Apple Silicon</h2>
-        <p>Native performance. Zero compromise on your daily workflow.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">&#9889;</div>
-          <h3>Adaptive Throttling</h3>
-          <p>Automatically scales down when you're using your Mac, ramps up when idle. Respects thermal limits, battery level, and Low Power Mode.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128274;</div>
-          <h3>Private &amp; Secure</h3>
-          <p>End-to-end encrypted connections with cryptographic node identity. Your Mac processes requests &mdash; your data stays yours.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#127760;</div>
-          <h3>Global P2P Network</h3>
-          <p>Direct peer-to-peer connections via QUIC. NAT traversal handles the networking so you don't have to open any ports.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128640;</div>
-          <h3>Multi-Device Clusters</h3>
-          <p>Connect multiple Macs via Thunderbolt or LAN to pool their memory and run massive models no single device could handle alone.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="earnings">
-    <div class="section-center">
-      <div class="section-header">
-        <h2>Earning potential</h2>
-        <p>Estimates based on typical idle hours. More RAM and faster chips earn more per request.</p>
       </div>
       <div class="earnings-grid">
         <div class="earning-card">
@@ -759,44 +750,47 @@
     </div>
   </section>
 
-  <section id="api" class="api-section">
+  <!-- Features -->
+  <section id="features">
     <div class="section-center">
       <div class="section-header">
-        <h2>For developers: just use the API</h2>
-        <p>No app needed. Send USDC, get an API key, swap one line of code. OpenAI-compatible — works with any existing client.</p>
+        <h2>Built for Apple Silicon</h2>
+        <p>Native performance. Zero compromise on your daily workflow.</p>
       </div>
-      <div class="api-steps">
-        <div class="api-step">
-          <div class="num">1</div>
-          <h4>Send USDC</h4>
-          <p>Deposit any amount of USDC on Base L2 to the network address. No signup, no KYC.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#9889;</div>
+          <h3>Adaptive Throttling</h3>
+          <p>Automatically scales down when you're active, ramps up when idle. Respects thermal limits, battery, and Low Power Mode.</p>
         </div>
-        <div class="api-step">
-          <div class="num">2</div>
-          <h4>Get API Key</h4>
-          <p>One API call with your wallet address. Instant key, balance auto-credited.</p>
+        <div class="feature-card">
+          <div class="feature-icon">&#128274;</div>
+          <h3>Private &amp; Secure</h3>
+          <p>End-to-end encrypted connections with cryptographic node identity. Your data stays yours.</p>
         </div>
-        <div class="api-step">
-          <div class="num">3</div>
-          <h4>Start Building</h4>
-          <p>Drop-in replacement for OpenAI. Change the base URL, keep everything else.</p>
+        <div class="feature-card">
+          <div class="feature-icon">&#127760;</div>
+          <h3>Global P2P Network</h3>
+          <p>Direct peer-to-peer via QUIC with automatic NAT traversal. No ports to open, no configuration.</p>
         </div>
-      </div>
-      <div class="api-demo">
-        <span class="comment"># Just change the base URL</span><br>
-        <span class="keyword">curl</span> <span class="url">https://api.teale.com/v1/chat/completions</span> \<br>
-        &nbsp;&nbsp;-H <span class="string">"Authorization: Bearer sk-teale-..."</span> \<br>
-        &nbsp;&nbsp;-H <span class="string">"Content-Type: application/json"</span> \<br>
-        &nbsp;&nbsp;-d <span class="string">'{"model": "llama-3.1-8b", "messages": [{"role": "user", "content": "Hello"}]}'</span>
+        <div class="feature-card">
+          <div class="feature-icon">&#128640;</div>
+          <h3>Multi-Device Clusters</h3>
+          <p>Pool multiple Macs via Thunderbolt or LAN to run massive models no single device could handle.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="download" class="cta-section">
-    <h2>Start earning today</h2>
-    <p>Download Teale, install it, and your Mac starts earning while you're away.</p>
-    <a href="#" class="btn btn-white btn-large">Download for macOS</a>
-    <p style="margin-top:1rem;font-size:0.85rem;opacity:0.7">Requires macOS 14 Sonoma or later. Apple Silicon only.</p>
+  <!-- CTA -->
+  <section id="api" class="cta-section">
+    <h2>Get compute in 30 seconds</h2>
+    <p>No account. No approval. No credit card. Just USDC and a curl command.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn btn-white btn-large">Get API Key</a>
+      <a href="#" class="btn btn-outline btn-large">Download for Mac</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:0.85rem;opacity:0.7">OpenAI-compatible API. Works with any client library. macOS app requires Sonoma 14+ on Apple Silicon.</p>
   </section>
 
   <footer>
