@@ -431,29 +431,6 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
 
-    .signup-form {
-      display: flex;
-      gap: 0.75rem;
-      max-width: 440px;
-      margin: 0 auto;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .signup-form input {
-      flex: 1;
-      min-width: 220px;
-      padding: 0.9rem 1.2rem;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.15);
-      color: var(--white);
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .signup-form input::placeholder { color: rgba(255,255,255,0.6); }
-    .signup-form input:focus { border-color: var(--white); }
-
     footer {
       padding: 3rem 2rem;
       text-align: center;
@@ -484,19 +461,19 @@
       <a href="#how-it-works">How It Works</a>
       <a href="#features">Features</a>
       <a href="#earnings">Earnings</a>
-      <a href="#early-access" class="btn btn-primary">Get Early Access</a>
+      <a href="#download" class="btn btn-primary">Download</a>
     </div>
   </nav>
 
   <section class="hero">
     <div class="hero-badge">
       <span class="dot"></span>
-      Coming soon for macOS
+      Now available for macOS
     </div>
     <h1>Make money<br><span class="highlight">while you sleep.</span></h1>
     <p>Your Mac has a powerful AI chip sitting idle most of the day. Teale turns it into a passive income stream by sharing unused compute with the network.</p>
     <div class="hero-ctas">
-      <a href="#early-access" class="btn btn-primary btn-large">Join the Waitlist</a>
+      <a href="#download" class="btn btn-primary btn-large">Download for Mac</a>
       <a href="#how-it-works" class="btn btn-secondary btn-large">See How It Works</a>
     </div>
 
@@ -539,7 +516,7 @@
         <div class="step">
           <div class="step-number">1</div>
           <h3>Install Teale</h3>
-          <p>A lightweight macOS app that lives in your menu bar. No configuration needed — it detects your hardware automatically.</p>
+          <p>A lightweight macOS app that lives in your menu bar. No configuration needed &mdash; it detects your hardware automatically.</p>
         </div>
         <div class="step">
           <div class="step-number">2</div>
@@ -548,8 +525,8 @@
         </div>
         <div class="step">
           <div class="step-number">3</div>
-          <h3>Earn Credits</h3>
-          <p>Get paid for every AI inference request your Mac handles. More powerful hardware earns more, automatically.</p>
+          <h3>Get Paid</h3>
+          <p>Earn for every AI inference request your Mac handles. More powerful hardware earns more, automatically.</p>
         </div>
       </div>
     </div>
@@ -570,7 +547,7 @@
         <div class="feature-card">
           <div class="feature-icon">&#128274;</div>
           <h3>Private &amp; Secure</h3>
-          <p>Your Mac processes AI requests — it never sees the data. End-to-end encrypted connections with cryptographic node identity.</p>
+          <p>End-to-end encrypted connections with cryptographic node identity. Your Mac processes requests &mdash; your data stays yours.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">&#127760;</div>
@@ -590,41 +567,39 @@
     <div class="section-center">
       <div class="section-header">
         <h2>Earning potential</h2>
-        <p>Estimates based on typical overnight idle hours. More RAM and faster chips earn more per request.</p>
+        <p>Estimates based on typical idle hours. More RAM and faster chips earn more per request.</p>
       </div>
       <div class="earnings-grid">
         <div class="earning-card">
-          <div class="device">MacBook Air</div>
-          <div class="chip">M3</div>
-          <div class="ram">24 GB Unified Memory</div>
-          <div class="amount">$30</div>
+          <div class="device">MacBook Air / Pro</div>
+          <div class="chip">M1 / M2 / M3</div>
+          <div class="ram">8 GB Unified Memory</div>
+          <div class="amount">$10</div>
           <div class="period">per month</div>
         </div>
         <div class="earning-card">
-          <div class="device">Mac Mini</div>
-          <div class="chip">M4 Pro</div>
-          <div class="ram">64 GB Unified Memory</div>
-          <div class="amount">$90</div>
+          <div class="device">MacBook Air / Pro</div>
+          <div class="chip">M2 / M3 / M4</div>
+          <div class="ram">16 GB Unified Memory</div>
+          <div class="amount">$25</div>
           <div class="period">per month</div>
         </div>
         <div class="earning-card">
-          <div class="device">Mac Studio</div>
-          <div class="chip">M3 Ultra</div>
-          <div class="ram">512 GB Unified Memory</div>
-          <div class="amount">$400</div>
+          <div class="device">MacBook Pro / Mac Mini</div>
+          <div class="chip">M3 Pro / M4 Pro</div>
+          <div class="ram">36 GB Unified Memory</div>
+          <div class="amount">$60</div>
           <div class="period">per month</div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="early-access" class="cta-section">
-    <h2>Get early access</h2>
-    <p>Join the waitlist and be first to start earning when we launch.</p>
-    <form class="signup-form" action="https://formspree.io/f/placeholder" method="POST">
-      <input type="email" name="email" placeholder="you@email.com" required>
-      <button type="submit" class="btn btn-white btn-large">Join Waitlist</button>
-    </form>
+  <section id="download" class="cta-section">
+    <h2>Start earning today</h2>
+    <p>Download Teale, install it, and your Mac starts earning while you're away.</p>
+    <a href="#" class="btn btn-white btn-large">Download for macOS</a>
+    <p style="margin-top:1rem;font-size:0.85rem;opacity:0.7">Requires macOS 14 Sonoma or later. Apple Silicon only.</p>
   </section>
 
   <footer>
