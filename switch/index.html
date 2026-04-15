@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Switch to Teale — Keep using AI your way</title>
+  <meta name="description" content="Anthropic blocked your third-party client. Teale gives you OpenAI-compatible inference at 100x less cost, with no gatekeepers. Switch in 30 seconds.">
+  <meta property="og:title" content="Switch to Teale — Keep using AI your way">
+  <meta property="og:description" content="Anthropic blocked your third-party client. Teale gives you OpenAI-compatible inference at 100x less cost, with no gatekeepers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://teale.com/switch">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍃</text></svg>">
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-light: #14b8a6;
+      --teal-dark: #0f766e;
+      --teal-50: #f0fdfa;
+      --teal-100: #ccfbf1;
+      --gray-900: #0f172a;
+      --gray-800: #1e293b;
+      --gray-700: #334155;
+      --gray-400: #94a3b8;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+      color: var(--gray-900);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed; top: 0; width: 100%;
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 100;
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.85);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--teal); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--gray-700); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--teal); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--teal); color: var(--white); }
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13,148,136,0.3); }
+    .btn-dark { background: var(--gray-900); color: var(--white); }
+    .btn-dark:hover { background: var(--gray-800); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .btn-outline-light { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.25); }
+    .btn-outline-light:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+    .btn-white { background: var(--white); color: var(--teal-dark); }
+    .btn-white:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .btn-large { padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 14px; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      background: var(--gray-900); color: var(--white);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: -40% -20%;
+      background: radial-gradient(ellipse at 30% 20%, rgba(13,148,136,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 80%, rgba(20,184,166,0.1) 0%, transparent 50%);
+      z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.4rem 1rem; border-radius: 999px;
+      font-size: 0.8rem; font-weight: 600;
+      background: rgba(13,148,136,0.2); color: var(--teal-light);
+      border: 1px solid rgba(13,148,136,0.3);
+      margin-bottom: 2rem; letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;
+      max-width: 800px; margin-bottom: 1.5rem;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--teal), var(--teal-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero .subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: var(--gray-400); max-width: 620px; line-height: 1.7; margin-bottom: 2.5rem;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    /* ── Section helpers ── */
+    section { padding: 5rem 2rem; }
+    .section-center { max-width: 1100px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800;
+      letter-spacing: -0.02em; margin-bottom: 1rem;
+    }
+    .section-header p {
+      font-size: 1.1rem; color: var(--gray-700);
+      max-width: 600px; margin: 0 auto; line-height: 1.6;
+    }
+
+    /* ── The Problem ── */
+    .problem-section { background: var(--white); }
+    .problem-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+      max-width: 900px; margin: 0 auto;
+    }
+    .problem-card {
+      border-radius: 16px; padding: 2.5rem 2rem;
+    }
+    .problem-card.old {
+      background: #fef2f2; border: 2px solid #fecaca;
+    }
+    .problem-card.new {
+      background: var(--teal-50); border: 2px solid var(--teal-100);
+    }
+    .problem-card .label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 1rem;
+    }
+    .problem-card.old .label { color: #dc2626; }
+    .problem-card.new .label { color: var(--teal-dark); }
+    .problem-card h3 {
+      font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+    .problem-card ul {
+      list-style: none; font-size: 0.95rem; line-height: 2.2;
+      color: var(--gray-700);
+    }
+    .problem-card.old ul li::before {
+      content: '\2717'; margin-right: 0.6rem; font-weight: 700; color: #dc2626;
+    }
+    .problem-card.new ul li::before {
+      content: '\2713'; margin-right: 0.6rem; font-weight: 700; color: var(--teal);
+    }
+
+    /* ── Migration Steps ── */
+    .migrate-section { background: var(--gray-900); color: var(--white); }
+    .migrate-section .section-header p { color: var(--gray-400); }
+
+    .harness-tabs {
+      display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .harness-tab {
+      padding: 0.5rem 1.25rem; border-radius: 999px; font-size: 0.9rem; font-weight: 600;
+      border: 2px solid rgba(255,255,255,0.2); background: transparent; color: var(--white);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .harness-tab:hover { border-color: rgba(255,255,255,0.4); }
+    .harness-tab.active { background: var(--white); color: var(--gray-900); border-color: var(--white); }
+    .harness-content { display: none; }
+    .harness-content.active { display: block; }
+
+    .terminal {
+      max-width: 700px; margin: 0 auto;
+      background: var(--gray-800); border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+    }
+    .terminal-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 12px 16px;
+      background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .terminal-bar span { width: 12px; height: 12px; border-radius: 50%; }
+    .terminal-bar span:nth-child(1) { background: #ff5f57; }
+    .terminal-bar span:nth-child(2) { background: #febc2e; }
+    .terminal-bar span:nth-child(3) { background: #28c840; }
+    .terminal-bar .title { flex:1; text-align:center; font-size:0.75rem; color:var(--gray-400); font-weight:500; }
+
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.82rem; line-height: 2; color: var(--gray-400);
+    }
+    .terminal-body .prompt { color: var(--teal-light); }
+    .terminal-body .cmd { color: var(--white); }
+    .terminal-body .flag { color: #c084fc; }
+    .terminal-body .string { color: #fbbf24; }
+    .terminal-body .comment { color: #475569; }
+    .terminal-body .output { color: var(--teal-light); }
+
+    .terminal-step {
+      margin-bottom: 1.2rem; padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .terminal-step:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+    .terminal-step .step-label {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--teal); font-weight: 700; margin-bottom: 0.5rem;
+      font-family: -apple-system, system-ui, sans-serif;
+    }
+
+    .migrate-note {
+      text-align: center; margin-top: 2rem;
+      font-size: 0.9rem; color: var(--gray-400); line-height: 1.7;
+      max-width: 560px; margin-left: auto; margin-right: auto;
+    }
+    .migrate-note a { color: var(--teal-light); text-decoration: none; }
+    .migrate-note a:hover { text-decoration: underline; }
+
+    /* ── Why Teale ── */
+    .why-section { background: var(--teal-50); }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .why-card {
+      background: var(--white); border-radius: 16px; padding: 2rem;
+      border: 1px solid rgba(0,0,0,0.06); transition: all 0.2s;
+    }
+    .why-card:hover { border-color: var(--teal); box-shadow: 0 4px 20px rgba(13,148,136,0.1); }
+    .why-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--teal-50); border: 2px solid var(--teal-100);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.2rem;
+    }
+    .why-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .why-card p { color: var(--gray-700); line-height: 1.6; font-size: 0.95rem; }
+
+    /* ── Cost Comparison ── */
+    .cost-section { background: var(--white); }
+    .cost-table {
+      max-width: 800px; margin: 0 auto;
+      border-collapse: collapse; width: 100%;
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .cost-table th, .cost-table td {
+      padding: 1.1rem 1.5rem; text-align: left; font-size: 0.95rem;
+    }
+    .cost-table thead th {
+      background: var(--gray-900); color: var(--white); font-weight: 700;
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .cost-table tbody tr { border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .cost-table tbody tr:last-child { border-bottom: none; }
+    .cost-table tbody tr:nth-child(even) { background: var(--teal-50); }
+    .cost-table .price-old { color: var(--gray-400); }
+    .cost-table .price-teale { color: var(--teal-dark); font-weight: 700; }
+    .cost-table .savings { color: var(--teal); font-weight: 800; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white); text-align: center; padding: 6rem 2rem;
+    }
+    .cta-section h2 {
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+      letter-spacing: -0.02em; margin-bottom: 1rem;
+    }
+    .cta-section p {
+      font-size: 1.15rem; opacity: 0.9;
+      max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.6;
+    }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .cta-note { margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.7; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center; padding: 2rem;
+      color: var(--gray-400); font-size: 0.85rem;
+      background: var(--gray-900);
+    }
+    footer a { color: var(--gray-400); text-decoration: none; }
+    footer a:hover { color: var(--teal-light); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .problem-grid, .why-grid { grid-template-columns: 1fr; }
+      .cost-table { font-size: 0.85rem; }
+      .cost-table th, .cost-table td { padding: 0.8rem 1rem; }
+      .hero-ctas, .cta-buttons { flex-direction: column; align-items: center; }
+      .harness-tabs { gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">teale</a>
+    <div class="nav-links">
+      <a href="/#use">Use AI</a>
+      <a href="/#earn">Earn</a>
+      <a href="/#developers">Developers</a>
+      <a href="/docs/">Docs</a>
+      <a href="#migrate" class="btn btn-primary">Switch Now</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="hero-badge">For OpenClaw, Hermes Agent, and other third-party client users</div>
+    <h1>Your client got blocked. <br><span class="highlight">Your AI doesn't have to stop.</span></h1>
+    <p class="subtitle">
+      Anthropic cut off third-party harnesses from using Claude subscriptions. Teale gives you the same models through a decentralized network &mdash; no corporation decides when you lose access. Switch in 30 seconds.
+    </p>
+    <div class="hero-ctas">
+      <a href="#migrate" class="btn btn-white btn-large">Switch in 30 seconds</a>
+      <a href="#why" class="btn btn-outline-light btn-large">Why Teale is different</a>
+    </div>
+  </section>
+
+  <!-- ── The Problem vs. The Fix ── -->
+  <section class="problem-section">
+    <div class="section-center">
+      <div class="section-header">
+        <h2>What happened &mdash; and what you can do</h2>
+        <p>Centralized AI providers can revoke your access at any time. Decentralized inference can't be shut off.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card old">
+          <div class="label">The old way</div>
+          <h3>Centralized subscriptions</h3>
+          <ul>
+            <li>$20/month for rate-limited access</li>
+            <li>Provider decides which clients are allowed</li>
+            <li>Your tools break overnight with no warning</li>
+            <li>No API access without a separate paid plan</li>
+            <li>Your usage data trains their next model</li>
+          </ul>
+        </div>
+        <div class="problem-card new">
+          <div class="label">With Teale</div>
+          <h3>Decentralized inference</h3>
+          <ul>
+            <li>Run models locally for free, or use the network</li>
+            <li>Use any client &mdash; it's OpenAI-compatible</li>
+            <li>No one can revoke your access</li>
+            <li>$1 buys 20 million tokens on the network</li>
+            <li>E2E encrypted &mdash; no one sees your prompts</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Migration Guide ── -->
+  <section id="migrate" class="migrate-section">
+    <div class="section-center">
+      <div class="section-header">
+        <h2>Switch your harness to Teale</h2>
+        <p>Teale's API is OpenAI-compatible. Point your existing client at localhost and you're done.</p>
+      </div>
+
+      <div class="harness-tabs">
+        <button class="harness-tab active" data-harness="openclaw">OpenClaw</button>
+        <button class="harness-tab" data-harness="hermes">Hermes Agent</button>
+        <button class="harness-tab" data-harness="openai-sdk">OpenAI SDK</button>
+        <button class="harness-tab" data-harness="continue">Continue.dev</button>
+        <button class="harness-tab" data-harness="any">Any Client</button>
+      </div>
+
+      <!-- OpenClaw -->
+      <div class="harness-content active" data-harness="openclaw">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+            <div class="title">Switching from OpenClaw to Teale</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-step">
+              <div class="step-label">1. Install Teale (one command)</div>
+              <span class="prompt">$</span> <span class="cmd">curl</span> <span class="flag">-fsSL</span> <span class="string">https://teale.com/install.sh</span> <span class="cmd">| sh</span><br>
+              <span class="comment"># Installs the app + starts the local API server on port 11434</span>
+            </div>
+            <div class="terminal-step">
+              <div class="step-label">2. Update your OpenClaw config</div>
+              <span class="comment"># In OpenClaw settings, change your API endpoint:</span><br>
+              <span class="comment"># Old: https://api.anthropic.com/v1</span><br>
+              <span class="comment"># New:</span> <span class="string">http://localhost:11434/v1</span><br>
+              <span class="comment"># That's it. OpenClaw works with any OpenAI-compatible API.</span>
+            </div>
+            <div class="terminal-step">
+              <div class="step-label">3. Chat like nothing changed</div>
+              <span class="comment"># Your conversations, presets, and system prompts all work.</span><br>
+              <span class="comment"># Models run on your Mac. No subscription. No rate limits.</span><br>
+              <span class="output">Ready. Using Llama 3.1 8B on local hardware.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hermes Agent -->
+      <div class="harness-content" data-harness="hermes">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+            <div class="title">Switching from Hermes Agent to Teale</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-step">
+              <div class="step-label">1. Install Teale</div>
+              <span class="prompt">$</span> <span class="cmd">curl</span> <span class="flag">-fsSL</span> <span class="string">https://teale.com/install.sh</span> <span class="cmd">| sh</span><br>
+              <span class="comment"># Teale runs a local API server on port 11434</span>
+            </div>
+            <div class="terminal-step">
+              <div class="step-label">2. Point Hermes at your local server</div>
+              <span class="comment"># In Hermes Agent settings:</span><br>
+              <span class="comment"># Provider: OpenAI-compatible</span><br>
+              <span class="comment"># Base URL:</span> <span class="string">http://localhost:11434/v1</span><br>
+              <span class="comment"># API Key:</span> <span class="string">teale</span> <span class="comment">(any non-empty string works locally)</span>
+            </div>
+            <div class="terminal-step">
+              <div class="step-label">3. Resume your agent workflows</div>
+              <span class="comment"># All Hermes features work &mdash; tool use, chains, memory.</span><br>
+              <span class="comment"># Teale serves the same OpenAI chat completions format.</span><br>
+              <span class="output">Ready. Agent connected to local Teale instance.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OpenAI SDK -->
+      <div class="harness-content" data-harness="openai-sdk">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+            <div class="title">Using Teale with the OpenAI SDK</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-step">
+              <div class="step-label">1. Install Teale</div>
+              <span class="prompt">$</span> <span class="cmd">curl</span> <span class="flag">-fsSL</span> <span class="string">https://teale.com/install.sh</span> <span class="cmd">| sh</span>
+            </div>
+            <div class="terminal-step">
+              <div class="step-label">2. Two lines of code</div>
+              <span class="cmd">from</span> <span class="string">openai</span> <span class="cmd">import</span> <span class="string">OpenAI</span><br>
+              <br>
+              <span class="cmd">client = OpenAI(</span><br>
+              &nbsp;&nbsp;<span class="flag">base_url</span><span class="cmd">=</span><span class="string">"http://localhost:11434/v1"</span><span class="cmd">,</span><br>
+              &nbsp;&nbsp;<span class="flag">api_key</span><span class="cmd">=</span><span class="string">"teale"</span><br>
+              <span class="cmd">)</span><br>
+              <br>
+              <span class="comment"># Use exactly like you used the OpenAI or Anthropic SDK</span><br>
+              <span class="cmd">response = client.chat.completions.create(</span><br>
+              &nbsp;&nbsp;<span class="flag">model</span><span class="cmd">=</span><span class="string">"llama-3.1-8b"</span><span class="cmd">,</span><br>
+              &nbsp;&nbsp;<span class="flag">messages</span><span class="cmd">=[{</span><span class="string">"role"</span><span class="cmd">:</span> <span class="string">"user"</span><span class="cmd">,</span> <span class="string">"content"</span><span class="cmd">:</span> <span class="string">"Hello"</span><span class="cmd">}]</span><br>
+              <span class="cmd">)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Continue.dev -->
+      <div class="harness-content" data-harness="continue">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+            <div class="title">Using Teale with Continue.dev</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-step">
+              <div class="step-label">1. Install Teale</div>
+              <span class="prompt">$</span> <span class="cmd">curl</span> <span class="flag">-fsSL</span> <span class="string">https://teale.com/install.sh</span> <span class="cmd">| sh</span>
+            </div>
+            <div class="terminal-step">
+              <div class="step-label">2. Edit ~/.continue/config.json</div>
+              <span class="cmd">{</span><br>
+              &nbsp;&nbsp;<span class="string">"models"</span><span class="cmd">: [{</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"title"</span><span class="cmd">:</span> <span class="string">"Teale Local"</span><span class="cmd">,</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"provider"</span><span class="cmd">:</span> <span class="string">"openai"</span><span class="cmd">,</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"model"</span><span class="cmd">:</span> <span class="string">"llama-3.1-8b"</span><span class="cmd">,</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"apiBase"</span><span class="cmd">:</span> <span class="string">"http://localhost:11434/v1"</span><span class="cmd">,</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"apiKey"</span><span class="cmd">:</span> <span class="string">"teale"</span><br>
+              &nbsp;&nbsp;<span class="cmd">}]</span><br>
+              <span class="cmd">}</span>
+            </div>
+            <div class="terminal-step">
+              <div class="step-label">3. Code with AI in your editor</div>
+              <span class="comment"># Continue's autocomplete, chat, and edit all work.</span><br>
+              <span class="comment"># No API key costs. No rate limits. Runs on your Mac.</span><br>
+              <span class="output">Ready. Continue.dev connected to Teale.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Any Client -->
+      <div class="harness-content" data-harness="any">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+            <div class="title">Using Teale with any OpenAI-compatible client</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-step">
+              <div class="step-label">1. Install Teale</div>
+              <span class="prompt">$</span> <span class="cmd">curl</span> <span class="flag">-fsSL</span> <span class="string">https://teale.com/install.sh</span> <span class="cmd">| sh</span>
+            </div>
+            <div class="terminal-step">
+              <div class="step-label">2. Point any client at Teale</div>
+              <span class="comment"># Teale exposes an OpenAI-compatible API at:</span><br>
+              <span class="output">http://localhost:11434/v1</span><br>
+              <br>
+              <span class="comment"># Supports:</span><br>
+              <span class="comment">#   POST /v1/chat/completions (streaming + non-streaming)</span><br>
+              <span class="comment">#   GET  /v1/models</span><br>
+              <br>
+              <span class="comment"># Any app that lets you set a custom base URL works:</span><br>
+              <span class="comment"># Chatbox, TypingMind, BoltAI, Msty, LibreChat,</span><br>
+              <span class="comment"># LangChain, LlamaIndex, or plain curl.</span>
+            </div>
+            <div class="terminal-step">
+              <div class="step-label">3. Verify with curl</div>
+              <span class="prompt">$</span> <span class="cmd">curl</span> <span class="string">http://localhost:11434/v1/models</span><br>
+              <span class="output">{"data": [{"id": "llama-3.1-8b", ...}, {"id": "gemma-2-2b", ...}]}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="migrate-note">
+        Need the network for larger models your Mac can't run locally?<br>
+        <a href="/docs/getting-started/quickstart-api/">See the API quickstart</a> &mdash; fund with $1 and get 20 million tokens.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Why Teale ── -->
+  <section id="why" class="why-section">
+    <div class="section-center">
+      <div class="section-header">
+        <h2>Why this won't happen again with Teale</h2>
+        <p>Teale is a decentralized network. There's no single company that can cut you off.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">&#x1f513;</div>
+          <h3>No gatekeepers</h3>
+          <p>Models run on your hardware or on the peer network. No corporation decides which clients are "allowed." Use any tool you want.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#x1f4b0;</div>
+          <h3>100x cheaper</h3>
+          <p>Free locally. $0.05 per million tokens on the network. That's $1 for 20 million tokens &mdash; what costs $20+ on centralized APIs.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#x1f512;</div>
+          <h3>E2E encrypted</h3>
+          <p>All network traffic uses Noise protocol encryption. No one &mdash; not even relay operators &mdash; can read your prompts or completions.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#x1f310;</div>
+          <h3>Open source</h3>
+          <p>The entire stack is open source. Audit the code, fork it, self-host it. <a href="https://github.com/teale-ai" style="color:var(--teal);text-decoration:none;">github.com/teale-ai</a></p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#x1f4bb;</div>
+          <h3>Earn while idle</h3>
+          <p>Share your Mac's compute when you're not using it and earn money. The network pays contributors, not shareholders.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">&#x26a1;</div>
+          <h3>OpenAI-compatible</h3>
+          <p>Drop-in replacement for any app built on the OpenAI API. Change the base URL, keep everything else.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Cost Comparison ── -->
+  <section class="cost-section">
+    <div class="section-center">
+      <div class="section-header">
+        <h2>What you were paying vs. what you'll pay</h2>
+      </div>
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th>What you need</th>
+            <th>Centralized</th>
+            <th>Teale</th>
+            <th>Savings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chat with AI (casual use)</td>
+            <td class="price-old">$20/mo subscription</td>
+            <td class="price-teale">$0 (local)</td>
+            <td class="savings">Free</td>
+          </tr>
+          <tr>
+            <td>1M tokens via API</td>
+            <td class="price-old">$3 &ndash; $15</td>
+            <td class="price-teale">$0.05</td>
+            <td class="savings">60&ndash;300x</td>
+          </tr>
+          <tr>
+            <td>Coding assistant (Continue, etc.)</td>
+            <td class="price-old">$20/mo + rate limits</td>
+            <td class="price-teale">$0 (local)</td>
+            <td class="savings">Free</td>
+          </tr>
+          <tr>
+            <td>Agent workflows (100M tokens/mo)</td>
+            <td class="price-old">$300 &ndash; $1,500</td>
+            <td class="price-teale">$5</td>
+            <td class="savings">60&ndash;300x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ── -->
+  <section class="cta-section">
+    <h2>Don't wait for the next shutdown</h2>
+    <p>Centralized AI will keep tightening control. Own your inference. Join a network where users are participants, not products.</p>
+    <div class="cta-buttons">
+      <a href="https://teale.com/install.sh" onclick="navigator.clipboard.writeText('curl -fsSL https://teale.com/install.sh | sh')" class="btn btn-white btn-large">Install Teale</a>
+      <a href="https://github.com/teale-ai/teale-mac-app" class="btn btn-outline-light btn-large">View Source on GitHub</a>
+    </div>
+    <p class="cta-note">macOS 14+ &middot; Apple Silicon &middot; 100% free &middot; 100% open source</p>
+  </section>
+
+  <footer>
+    <p><a href="/">teale.com</a> &middot; <a href="/docs/">Docs</a> &middot; <a href="https://github.com/teale-ai">GitHub</a></p>
+    <p style="margin-top:0.5rem">&copy; 2026 Teale. Built with Claude.</p>
+  </footer>
+
+  <script>
+    // Harness tab switching
+    document.querySelectorAll('.harness-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var harness = tab.dataset.harness;
+        document.querySelectorAll('.harness-tab').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelectorAll('.harness-content').forEach(function(c) { c.classList.remove('active'); });
+        tab.classList.add('active');
+        document.querySelector('.harness-content[data-harness="' + harness + '"]').classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
