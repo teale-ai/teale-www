@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-REPO="taylorhou/teale-mac-app"
+REPO="teale-ai/teale-mac-app"
 APP_NAME="Teale"
 APP_DIR="/Applications/${APP_NAME}.app"
 
