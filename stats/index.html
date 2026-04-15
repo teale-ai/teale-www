@@ -241,22 +241,42 @@
     <p>&copy; 2026 Teale. Built with Claude.</p>
   </footer>
 
-  <!--
-    To connect live stats, uncomment and point to your API:
-    <script>
-      fetch('https://api.teale.com/v1/network/stats')
-        .then(r => r.json())
-        .then(data => {
-          document.getElementById('stat-devices').textContent = data.devicesOnline.toLocaleString();
-          document.getElementById('stat-ram').textContent = data.pooledRAMTB + ' TB';
-          document.getElementById('stat-tokens').textContent = data.tokensServed;
-          document.getElementById('stat-requests').textContent = data.requestsServed;
-          document.getElementById('stat-models').textContent = data.modelsAvailable;
-          document.getElementById('stat-earned').textContent = '$' + data.earnedUSDC;
-        })
-        .catch(() => {}); // Keep static fallback on error
-    </script>
-  -->
+
+  <script>
+    function formatNumber(n) {
+      if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B';
+      if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+      if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+      return n.toLocaleString();
+    }
+
+    function formatUSDC(n) {
+      if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+      if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+      return '$' + n.toFixed(2);
+    }
+
+    async function fetchStats() {
+      try {
+        const res = await fetch('https://relay.teale.com/stats');
+        if (!res.ok) return;
+        const data = await res.json();
+
+        document.getElementById('stat-devices').textContent = data.devicesOnline.toLocaleString();
+        document.getElementById('stat-ram').textContent = data.pooledRAMTB + ' TB';
+        document.getElementById('stat-tokens').textContent = formatNumber(data.tokensServed);
+        document.getElementById('stat-requests').textContent = formatNumber(data.requestsServed);
+        document.getElementById('stat-models').textContent = data.modelsAvailable.toLocaleString();
+        document.getElementById('stat-earned').textContent = formatUSDC(data.earnedUSDC);
+      } catch {
+        // Keep static fallback values on error
+      }
+    }
+
+    // Fetch immediately, then refresh every hour
+    fetchStats();
+    setInterval(fetchStats, 60 * 60 * 1000);
+  </script>
 
 </body>
 </html>

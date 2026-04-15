@@ -443,9 +443,9 @@
   <!-- ── Stats Teaser ── -->
   <div class="stats-teaser">
     <a href="/stats">
-      <span class="stat-num">1,248</span> devices online &middot;
-      <span class="stat-num">847M</span> tokens served &middot;
-      <span class="stat-num">2.1M</span> requests
+      <span class="stat-num" id="teaser-devices">1,248</span> devices online &middot;
+      <span class="stat-num" id="teaser-tokens">847M</span> tokens served &middot;
+      <span class="stat-num" id="teaser-requests">2.1M</span> requests
       <span class="arrow">&rarr;</span>
     </a>
   </div>
@@ -738,6 +738,25 @@
         setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
       });
     }
+  </script>
+
+  <script>
+    (function() {
+      function fmt(n) {
+        if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B';
+        if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+        if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+        return n.toLocaleString();
+      }
+      fetch('https://relay.teale.com/stats')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          document.getElementById('teaser-devices').textContent = d.devicesOnline.toLocaleString();
+          document.getElementById('teaser-tokens').textContent = fmt(d.tokensServed);
+          document.getElementById('teaser-requests').textContent = fmt(d.requestsServed);
+        })
+        .catch(function() {});
+    })();
   </script>
 
 </body>
