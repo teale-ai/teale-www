@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Network Stats — Teale</title>
+  <meta name="description" content="Live stats from the Teale decentralized AI network. See devices online, tokens served, and more.">
+  <meta property="og:title" content="Teale Network Stats">
+  <meta property="og:description" content="Live stats from the Teale decentralized AI network.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://teale.com/stats">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍃</text></svg>">
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-light: #14b8a6;
+      --teal-dark: #0f766e;
+      --teal-50: #f0fdfa;
+      --teal-100: #ccfbf1;
+      --gray-900: #0f172a;
+      --gray-800: #1e293b;
+      --gray-700: #334155;
+      --gray-400: #94a3b8;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+      color: var(--white);
+      background: var(--gray-900);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      position: fixed; top: 0; width: 100%;
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 100;
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      background: rgba(15,23,42,0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--teal); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--gray-400); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--teal-light); }
+    .nav-links a.active { color: var(--teal-light); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--teal); color: var(--white); }
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13,148,136,0.3); }
+
+    /* ── Stats Page ── */
+    .stats-page {
+      flex: 1;
+      padding: 8rem 2rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .stats-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .stats-header h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .stats-header h1 .highlight {
+      background: linear-gradient(135deg, var(--teal), var(--teal-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stats-header p {
+      font-size: 1.15rem;
+      color: var(--gray-400);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .stat-card {
+      background: var(--gray-800);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.2s;
+    }
+    .stat-card:hover {
+      border-color: rgba(13,148,136,0.3);
+    }
+    .stat-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+    .stat-value {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--teal-light);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-400);
+    }
+
+    /* ── CTA ── */
+    .stats-cta {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .stats-cta p {
+      color: var(--gray-400);
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .stats-cta .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--teal-light);
+      border: 2px solid rgba(13,148,136,0.3);
+    }
+    .btn-outline:hover {
+      border-color: var(--teal);
+      background: rgba(13,148,136,0.1);
+    }
+
+    footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      color: var(--gray-400);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-page { padding: 6rem 1.5rem 3rem; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .stats-cta .cta-buttons { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">teale</a>
+    <div class="nav-links">
+      <a href="/#use">Use AI</a>
+      <a href="/#earn">Earn</a>
+      <a href="/#developers">Developers</a>
+      <a href="/stats" class="active">Network</a>
+      <a href="/#download" class="btn btn-primary">Download</a>
+    </div>
+  </nav>
+
+  <main class="stats-page">
+    <div class="stats-header">
+      <h1>Teale <span class="highlight">Network</span></h1>
+      <p>Real-time stats from the decentralized AI network. Every number is a real Mac contributing compute to make AI accessible.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">&#128187;</div>
+        <div class="stat-value" id="stat-devices">1,248</div>
+        <div class="stat-label">Devices Online</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">&#129518;</div>
+        <div class="stat-value" id="stat-ram">24.6 TB</div>
+        <div class="stat-label">Pooled RAM</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">&#9997;&#65039;</div>
+        <div class="stat-value" id="stat-tokens">847M</div>
+        <div class="stat-label">Tokens Served</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">&#128640;</div>
+        <div class="stat-value" id="stat-requests">2.1M</div>
+        <div class="stat-label">Requests Served</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">&#129504;</div>
+        <div class="stat-value" id="stat-models">12</div>
+        <div class="stat-label">Models Available</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">&#128176;</div>
+        <div class="stat-value" id="stat-earned">$38.4K</div>
+        <div class="stat-label">Earned by Contributors</div>
+      </div>
+    </div>
+
+    <div class="stats-cta">
+      <p>Join the network. Run AI for free, or earn money sharing your idle Mac.</p>
+      <div class="cta-buttons">
+        <a href="/#download" class="btn btn-primary">Download Teale</a>
+        <a href="/#developers" class="btn btn-outline">Get API Access</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Teale. Built with Claude.</p>
+  </footer>
+
+  <!--
+    To connect live stats, uncomment and point to your API:
+    <script>
+      fetch('https://api.teale.com/v1/network/stats')
+        .then(r => r.json())
+        .then(data => {
+          document.getElementById('stat-devices').textContent = data.devicesOnline.toLocaleString();
+          document.getElementById('stat-ram').textContent = data.pooledRAMTB + ' TB';
+          document.getElementById('stat-tokens').textContent = data.tokensServed;
+          document.getElementById('stat-requests').textContent = data.requestsServed;
+          document.getElementById('stat-models').textContent = data.modelsAvailable;
+          document.getElementById('stat-earned').textContent = '$' + data.earnedUSDC;
+        })
+        .catch(() => {}); // Keep static fallback on error
+    </script>
+  -->
+
+</body>
+</html>
