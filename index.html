@@ -153,13 +153,27 @@
     .how-deal {
       max-width: 700px; margin: 3rem auto 0;
       background: var(--gray-900); border-radius: 16px; padding: 2.5rem;
-      text-align: center; color: var(--white);
+      color: var(--white);
     }
     .how-deal h3 {
-      font-size: 1.4rem; font-weight: 800; margin-bottom: 0.75rem;
+      font-size: 1.5rem; font-weight: 800; margin-bottom: 1.25rem;
+      text-align: center; letter-spacing: -0.01em;
     }
     .how-deal h3 .teal { color: var(--teal-light); }
     .how-deal p { color: var(--gray-400); line-height: 1.7; font-size: 0.95rem; }
+    .how-deal-list {
+      list-style: none; padding: 0; margin: 0;
+      display: grid; gap: 0.9rem;
+    }
+    .how-deal-list li {
+      color: var(--gray-400); line-height: 1.6; font-size: 0.95rem;
+      padding-left: 1.25rem; position: relative;
+    }
+    .how-deal-list li::before {
+      content: '→'; color: var(--teal-light);
+      position: absolute; left: 0; font-weight: 700;
+    }
+    .how-deal-list strong { color: var(--white); font-weight: 700; }
 
     /* ── Developer / API ── */
     .demo-section { background: var(--gray-900); color: var(--white); padding: 6rem 2rem; }
@@ -214,6 +228,27 @@
     .install-section h2 {
       font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
       letter-spacing: -0.02em; margin-bottom: 2rem;
+    }
+    .platform-tabs {
+      display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;
+    }
+    .platform-tab {
+      padding: 0.5rem 1.25rem; border-radius: 999px; font-size: 0.9rem; font-weight: 600;
+      border: 2px solid rgba(255,255,255,0.25); background: transparent; color: var(--white);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .platform-tab:hover { border-color: rgba(255,255,255,0.5); }
+    .platform-tab.active { background: var(--white); color: var(--teal-dark); border-color: var(--white); }
+    .platform-tab .soon-badge {
+      font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em;
+      background: rgba(255,255,255,0.2); padding: 0.15rem 0.4rem; border-radius: 4px;
+      margin-left: 0.4rem; vertical-align: middle;
+    }
+    .platform-tab.active .soon-badge { background: rgba(13,148,136,0.15); color: var(--teal-dark); }
+    .platform-content { display: none; }
+    .platform-content.active { display: block; }
+    .platform-coming-soon {
+      font-size: 1.1rem; opacity: 0.85; margin: 1.5rem auto; line-height: 1.6; max-width: 520px;
     }
     .install-command {
       max-width: 600px; margin: 0 auto 1.5rem;
@@ -278,13 +313,13 @@
   <section class="hero">
     <h1>AI <span class="highlight">free forever.</span>*</h1>
     <p class="subtitle">
-      Install Teale on your Mac. Use AI whenever you want. When you're not using it, your Mac helps others on the network. That's the deal &mdash; and it's the only one where everyone wins.
+      Install Teale on any device. Use AI whenever you want. When you're not using it, your device helps others on the network. That's the deal &mdash; and it's the only one where everyone wins.
     </p>
     <div class="hero-ctas">
-      <a href="#download" class="btn btn-primary btn-large">Install on Mac</a>
+      <a href="#download" class="btn btn-primary btn-large">Install Teale</a>
       <a href="#developers" class="btn btn-dark btn-large">Get API Access</a>
     </div>
-    <p class="hero-asterisk">*As long as your device contributes inference to the network, your AI usage with that model is 100% free. You use AI 8&ndash;12 hours a day. Your Mac serves others the rest. Everyone gets AI. No one pays.</p>
+    <p class="hero-asterisk">*Every device that joins the network earns Teale Credits the moment it goes online. Credits redeem AI inference and can be gifted to others. They don't cash out &mdash; paying customers top up the pool so everyone can keep using AI.</p>
   </section>
 
   <!-- ── Stats Teaser ── -->
@@ -308,23 +343,28 @@
         <div class="how-step">
           <div class="how-step-num">1</div>
           <h3>Install Teale</h3>
-          <p>One command. Runs as a menu bar app. Detects your hardware, downloads a model that fits.</p>
+          <p>Available for Mac, Windows, iOS, and Android. Detects your hardware, downloads a model that fits.</p>
         </div>
         <div class="how-step">
           <div class="how-step-num">2</div>
           <h3>Use AI for free</h3>
-          <p>Chat, code, create. Models run locally on your Mac. No internet, no account, no limits.</p>
+          <p>Chat, code, create. Models run locally on Apple Silicon, NVIDIA, or AMD. No internet, no account, no limits.</p>
         </div>
         <div class="how-step">
           <div class="how-step-num">3</div>
-          <h3>Your Mac helps others</h3>
-          <p>When you're idle, your Mac serves requests from the network. That's what keeps your AI free.</p>
+          <h3>Credits accrue from minute one</h3>
+          <p>Your device earns Teale Credits every second it's online. Use them for AI. Gift them to anyone. They're for inference only.</p>
         </div>
       </div>
 
       <div class="how-deal">
-        <h3>The deal: <span class="teal">you contribute, you use AI free.</span></h3>
-        <p>You use AI maybe 8&ndash;12 hours a day. The other 12&ndash;16 hours, your Mac is idle. Teale uses that idle time to serve inference for others on the network. In exchange, your usage is free. The more people who join, the more supply there is, the better it works for everyone. No subscription. No corporation taking a cut. Just people sharing compute.</p>
+        <h3><span class="teal">Availability in.</span> AI out.</h3>
+        <ul class="how-deal-list">
+          <li><strong>Online earns credits slowly.</strong> Every second your device is reachable, credits tick up.</li>
+          <li><strong>AI usage burns credits quickly.</strong> A chat burst spends more than a few minutes of idle earn.</li>
+          <li><strong>Credits are for AI.</strong> Gift them freely to anyone &mdash; they don't cash out.</li>
+          <li><strong>Run low?</strong> Top up with USDC. That USDC funds the pool everyone shares.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -343,7 +383,7 @@
         </div>
         <div class="terminal-body">
           <div class="terminal-step">
-            <div class="step-label">Local &mdash; free, runs on your Mac</div>
+            <div class="step-label">Local &mdash; free, runs on your device</div>
             <span class="prompt">$</span> <span class="cmd">curl</span> <span class="string">http://localhost:11434/v1/chat/completions</span> \<br>
             &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \<br>
             &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-d</span> <span class="string">'{"model": "qwen3-8b", "messages": [{"role": "user", "content": "Hello"}]}'</span><br>
@@ -366,17 +406,84 @@
   <!-- ── Install ── -->
   <section id="download" class="install-section">
     <h2>Get started in 10 seconds</h2>
-    <div class="install-command">
-      <div class="install-command-header">Terminal</div>
-      <div class="install-command-body">
-        <code>curl -fsSL https://teale.com/install.sh | sh</code>
-        <button class="copy-btn" onclick="copyInstall(this)">Copy</button>
+
+    <div class="platform-tabs">
+      <button class="platform-tab active" data-platform="macos">macOS</button>
+      <button class="platform-tab" data-platform="windows">Windows</button>
+      <button class="platform-tab" data-platform="ios">iOS</button>
+      <button class="platform-tab" data-platform="android">Android</button>
+      <button class="platform-tab" data-platform="linux">Linux <span class="soon-badge">Soon</span></button>
+      <button class="platform-tab" data-platform="harmonyos">HarmonyOS <span class="soon-badge">Soon</span></button>
+    </div>
+
+    <!-- macOS -->
+    <div class="platform-content active" data-platform="macos">
+      <div class="install-command">
+        <div class="install-command-header">Terminal</div>
+        <div class="install-command-body">
+          <code>curl -fsSL https://teale.com/install.sh | sh</code>
+          <button class="copy-btn" onclick="copyInstall(this)">Copy</button>
+        </div>
+      </div>
+      <p class="install-note">macOS 14+ &middot; Apple Silicon &middot; Free forever &middot; Open source</p>
+    </div>
+
+    <!-- Windows -->
+    <div class="platform-content" data-platform="windows">
+      <div class="install-command">
+        <div class="install-command-header">PowerShell</div>
+        <div class="install-command-body">
+          <code>irm https://teale.com/install.ps1 | iex</code>
+          <button class="copy-btn" onclick="copyInstall(this)">Copy</button>
+        </div>
+      </div>
+      <p class="install-note">Windows 11 &middot; NVIDIA, AMD, or CPU &middot; Free forever &middot; Open source</p>
+    </div>
+
+    <!-- iOS -->
+    <div class="platform-content" data-platform="ios">
+      <p class="platform-coming-soon">Run Teale on your iPhone or iPad. Contribute compute when charging, use AI on the go.</p>
+      <div class="install-links">
+        <a href="https://apps.apple.com/app/teale" class="btn btn-white btn-large">Download on the App Store</a>
+      </div>
+      <p class="install-note">iOS 17+ &middot; A14 chip or newer</p>
+    </div>
+
+    <!-- Android -->
+    <div class="platform-content" data-platform="android">
+      <p class="platform-coming-soon">Run Teale on Android. Your phone contributes when idle, you use AI anywhere.</p>
+      <div class="install-links">
+        <a href="https://play.google.com/store/apps/details?id=com.teale" class="btn btn-white btn-large">Get it on Google Play</a>
+      </div>
+      <p class="install-note">Android 12+ &middot; Qualcomm, MediaTek, or Tensor</p>
+    </div>
+
+    <!-- Linux -->
+    <div class="platform-content" data-platform="linux">
+      <div class="install-command" style="opacity: 0.5;">
+        <div class="install-command-header">Terminal</div>
+        <div class="install-command-body">
+          <code>curl -fsSL https://teale.com/install.sh | sh</code>
+          <button class="copy-btn" disabled>Coming Soon</button>
+        </div>
+      </div>
+      <p class="platform-coming-soon">Linux support is in development. NVIDIA and AMD GPU acceleration via llama.cpp. Star the repo to get notified.</p>
+      <div class="install-links">
+        <a href="https://github.com/teale-ai/teale-node" class="btn btn-outline-light btn-large">Star on GitHub</a>
       </div>
     </div>
-    <div class="install-links">
-      <a href="https://github.com/teale-ai/teale-mac-app" class="btn btn-outline-light btn-large">View on GitHub</a>
+
+    <!-- HarmonyOS -->
+    <div class="platform-content" data-platform="harmonyos">
+      <p class="platform-coming-soon">HarmonyOS support is coming. Run Teale on Huawei devices worldwide. Star the repo to get notified.</p>
+      <div class="install-links">
+        <a href="https://github.com/teale-ai/teale-node" class="btn btn-outline-light btn-large">Star on GitHub</a>
+      </div>
     </div>
-    <p class="install-note">macOS 14+ &middot; Apple Silicon &middot; Free forever &middot; Open source</p>
+
+    <div class="install-links" style="margin-top: 2rem;">
+      <a href="https://github.com/teale-ai" class="btn btn-outline-light btn-large">View Source on GitHub</a>
+    </div>
   </section>
 
   <footer>
@@ -398,6 +505,29 @@
         setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
       });
     }
+
+    // Platform tab switching
+    document.querySelectorAll('.platform-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var platform = tab.dataset.platform;
+        document.querySelectorAll('.platform-tab').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelectorAll('.platform-content').forEach(function(c) { c.classList.remove('active'); });
+        tab.classList.add('active');
+        document.querySelector('.platform-content[data-platform="' + platform + '"]').classList.add('active');
+      });
+    });
+
+    // Auto-detect platform
+    (function() {
+      var ua = navigator.userAgent.toLowerCase();
+      var detected = 'macos';
+      if (/android/.test(ua)) detected = 'android';
+      else if (/iphone|ipad|ipod/.test(ua)) detected = 'ios';
+      else if (/windows|win32|win64/.test(ua)) detected = 'windows';
+      else if (/linux/.test(ua)) detected = 'linux';
+      var tab = document.querySelector('.platform-tab[data-platform="' + detected + '"]');
+      if (tab) tab.click();
+    })();
   </script>
 
   <script>
