@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teale — AI for Everyone</title>
-  <meta name="description" content="Run AI for free on your Mac. Or access the network for 100x less than OpenAI. No subscription. No account. AI that's actually affordable.">
-  <meta property="og:title" content="Teale — AI for Everyone">
-  <meta property="og:description" content="AI for free on your Mac. 100x cheaper than OpenAI on the network. Earn money sharing your idle compute.">
+  <title>Teale — AI Free Forever</title>
+  <meta name="description" content="AI free forever. Contribute your idle compute, use AI for free. No subscription. No account. Open source.">
+  <meta property="og:title" content="Teale — AI Free Forever">
+  <meta property="og:description" content="AI free forever. Contribute your idle compute, use AI for free. No subscription. No account. Open source.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://teale.com">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><g transform='translate(50,52) scale(0.22)' stroke='%2314b8a6' stroke-width='18' fill='none' stroke-linecap='round' stroke-linejoin='round'><path d='M-10,-140C-70,-140-130,-120-150,-70C-170,-20-160,30-140,60C-155,80-160,110-140,140C-120,170-80,175-50,165C-30,185,0,185,10,170'/><path d='M10,-140C70,-140,130,-120,150,-70C170,-20,160,30,140,60C155,80,160,110,140,140C120,170,80,175,50,165C30,185,0,185-10,170'/><path d='M-140,60C-110,50-80,60-60,80'/><path d='M140,60C110,50,80,60,60,80'/><path d='M-10,-20C-50,-10-80,10-90,40'/><path d='M10,-20C50,-10,80,10,90,40'/><path d='M0,-140L0,170' stroke-width='12' opacity='0.4'/></g></svg>">
@@ -56,8 +56,6 @@
     }
     .btn-primary { background: var(--teal); color: var(--white); }
     .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13,148,136,0.3); }
-    .btn-secondary { background: var(--teal-50); color: var(--teal-dark); border: 1px solid var(--teal-100); }
-    .btn-secondary:hover { background: var(--teal-100); }
     .btn-dark { background: var(--gray-900); color: var(--white); }
     .btn-dark:hover { background: var(--gray-800); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
     .btn-outline-light { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.25); }
@@ -92,10 +90,12 @@
     }
     .hero .subtitle {
       font-size: clamp(1.1rem, 2vw, 1.35rem);
-      color: var(--gray-700); max-width: 640px; line-height: 1.6; margin-bottom: 2.5rem;
+      color: var(--gray-700); max-width: 580px; line-height: 1.6; margin-bottom: 2.5rem;
     }
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
+    .hero-asterisk {
+      font-size: 0.85rem; color: var(--gray-400); max-width: 520px; line-height: 1.6;
+    }
 
     /* ── Stats Teaser ── */
     .stats-teaser {
@@ -122,67 +122,9 @@
       transition: transform 0.2s;
     }
     .stats-teaser a:hover .arrow { transform: translateX(3px); }
-    /* ── Two Paths ── */
-    .paths-section { padding: 5rem 2rem; }
-    .paths-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-      max-width: 1000px; margin: 0 auto;
-    }
-    .path-card {
-      border-radius: 20px; padding: 3rem 2.5rem;
-      display: flex; flex-direction: column;
-    }
-    .path-card.use-ai {
-      background: var(--gray-900); color: var(--white);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-    }
-    .path-card.earn {
-      background: var(--teal-50);
-      border: 2px solid var(--teal-100);
-    }
-    .path-label {
-      font-size: 0.75rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      margin-bottom: 1.2rem;
-    }
-    .path-card.use-ai .path-label { color: var(--teal-light); }
-    .path-card.earn .path-label { color: var(--teal-dark); }
 
-    .path-card h2 {
-      font-size: 1.8rem; font-weight: 800;
-      letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.15;
-    }
-    .path-card p {
-      font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem; flex: 1;
-    }
-    .path-card.use-ai p { color: var(--gray-400); }
-    .path-card.earn p { color: var(--gray-700); }
-
-    .path-card ul {
-      list-style: none; margin-bottom: 2rem;
-      font-size: 0.95rem; line-height: 2;
-    }
-    .path-card.use-ai ul li { color: var(--gray-400); }
-    .path-card.earn ul li { color: var(--gray-700); }
-    .path-card ul li::before {
-      content: '\2713'; margin-right: 0.6rem; font-weight: 700;
-    }
-    .path-card.use-ai ul li::before { color: var(--teal-light); }
-    .path-card.earn ul li::before { color: var(--teal); }
-
-    .path-price {
-      font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem;
-    }
-    .path-card.use-ai .path-price { color: var(--teal-light); }
-    .path-card.earn .path-price { color: var(--teal); }
-    .path-price-note {
-      font-size: 0.85rem; margin-bottom: 1.5rem;
-    }
-    .path-card.use-ai .path-price-note { color: var(--gray-400); }
-    .path-card.earn .path-price-note { color: var(--gray-700); }
-
-    /* ── Section helpers ── */
-    section { padding: 6rem 2rem; }
+    /* ── How It Works ── */
+    .how-section { padding: 6rem 2rem; }
     .section-center { max-width: 1100px; margin: 0 auto; }
     .section-header { text-align: center; margin-bottom: 4rem; }
     .section-header h2 {
@@ -191,57 +133,36 @@
     }
     .section-header p {
       font-size: 1.15rem; color: var(--gray-700);
-      max-width: 580px; margin: 0 auto; line-height: 1.6;
+      max-width: 560px; margin: 0 auto; line-height: 1.6;
     }
 
-    /* ── Cost Comparison ── */
-    .cost-section { background: var(--teal-50); }
+    .how-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
+    }
+    .how-step { text-align: center; padding: 2rem 1.5rem; }
+    .how-step-num {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: var(--teal-50); border: 2px solid var(--teal-100);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: 800; color: var(--teal);
+      margin-bottom: 1.5rem;
+    }
+    .how-step h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .how-step p { color: var(--gray-700); line-height: 1.6; }
 
-    .cost-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-      max-width: 900px; margin: 0 auto;
+    .how-deal {
+      max-width: 700px; margin: 3rem auto 0;
+      background: var(--gray-900); border-radius: 16px; padding: 2.5rem;
+      text-align: center; color: var(--white);
     }
-    .cost-card {
-      border-radius: 16px; padding: 2.5rem 2rem; text-align: center;
+    .how-deal h3 {
+      font-size: 1.4rem; font-weight: 800; margin-bottom: 0.75rem;
     }
-    .cost-card.them {
-      background: var(--white); border: 1px solid rgba(0,0,0,0.08);
-    }
-    .cost-card.free {
-      background: var(--gray-900); color: var(--white);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    }
-    .cost-card.network {
-      background: var(--gray-900); color: var(--white);
-      box-shadow: 0 15px 30px rgba(13,148,136,0.15);
-      border: 2px solid var(--teal);
-    }
-    .cost-card .provider {
-      font-size: 0.75rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;
-    }
-    .cost-card.them .provider { color: var(--gray-400); }
-    .cost-card.free .provider { color: var(--teal-light); }
-    .cost-card.network .provider { color: var(--teal-light); }
-    .cost-card .price {
-      font-size: 2.8rem; font-weight: 800; line-height: 1; margin-bottom: 0.25rem;
-    }
-    .cost-card.them .price { color: var(--gray-900); }
-    .cost-card.free .price { color: var(--white); }
-    .cost-card.network .price { color: var(--teal-light); }
-    .cost-card .unit {
-      font-size: 0.85rem; margin-bottom: 1.2rem;
-    }
-    .cost-card.them .unit { color: var(--gray-400); }
-    .cost-card.free .unit, .cost-card.network .unit { color: var(--gray-400); }
-    .cost-card .desc {
-      font-size: 0.9rem; line-height: 1.6;
-    }
-    .cost-card.them .desc { color: var(--gray-700); }
-    .cost-card.free .desc, .cost-card.network .desc { color: var(--gray-400); }
+    .how-deal h3 .teal { color: var(--teal-light); }
+    .how-deal p { color: var(--gray-400); line-height: 1.7; font-size: 0.95rem; }
 
-    /* ── Terminal Demo ── */
-    .demo-section { background: var(--gray-900); color: var(--white); }
+    /* ── Developer / API ── */
+    .demo-section { background: var(--gray-900); color: var(--white); padding: 6rem 2rem; }
     .demo-section .section-header p { color: var(--gray-400); }
 
     .terminal {
@@ -285,60 +206,6 @@
       font-family: -apple-system, system-ui, sans-serif;
     }
 
-    /* ── Earn Section ── */
-    .earn-section { }
-    .earn-steps {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
-      margin-bottom: 3rem;
-    }
-    .earn-step { text-align: center; padding: 2rem 1.5rem; }
-    .earn-step-num {
-      width: 56px; height: 56px; border-radius: 16px;
-      background: var(--teal-50); border: 2px solid var(--teal-100);
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; font-weight: 800; color: var(--teal);
-      margin-bottom: 1.5rem;
-    }
-    .earn-step h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
-    .earn-step p { color: var(--gray-700); line-height: 1.6; }
-
-    .earnings-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-    }
-    .earning-card {
-      border: 1px solid rgba(0,0,0,0.08); border-radius: 16px;
-      padding: 2rem; text-align: center; transition: all 0.2s;
-    }
-    .earning-card:hover { border-color: var(--teal); box-shadow: 0 4px 20px rgba(13,148,136,0.1); }
-    .earning-card .device {
-      font-size: 0.85rem; font-weight: 600; color: var(--gray-400);
-      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;
-    }
-    .earning-card .chip { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
-    .earning-card .ram { font-size: 0.9rem; color: var(--gray-700); margin-bottom: 1.5rem; }
-    .earning-card .amount { font-size: 2.5rem; font-weight: 800; color: var(--teal); line-height: 1; }
-    .earning-card .period { font-size: 0.9rem; color: var(--gray-700); margin-top: 0.25rem; }
-
-    /* ── Features ── */
-    .features-section { background: var(--gray-900); color: var(--white); }
-    .features-section .section-header p { color: var(--gray-400); }
-    .features-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
-    }
-    .feature-card {
-      background: var(--gray-800); border-radius: 16px; padding: 2rem;
-      border: 1px solid rgba(255,255,255,0.06); transition: border-color 0.2s;
-    }
-    .feature-card:hover { border-color: rgba(13,148,136,0.3); }
-    .feature-icon {
-      width: 44px; height: 44px; border-radius: 12px;
-      background: rgba(13,148,136,0.15);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; margin-bottom: 1.2rem;
-    }
-    .feature-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .feature-card p { color: var(--gray-400); line-height: 1.6; font-size: 0.95rem; }
-
     /* ── Install Section ── */
     .install-section {
       background: linear-gradient(135deg, var(--teal-dark), var(--teal));
@@ -348,22 +215,6 @@
       font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
       letter-spacing: -0.02em; margin-bottom: 2rem;
     }
-    .platform-tabs {
-      display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;
-    }
-    .platform-tab {
-      padding: 0.5rem 1.25rem; border-radius: 999px; font-size: 0.9rem; font-weight: 600;
-      border: 2px solid rgba(255,255,255,0.25); background: transparent; color: var(--white);
-      cursor: pointer; transition: all 0.2s;
-    }
-    .platform-tab:hover { border-color: rgba(255,255,255,0.5); }
-    .platform-tab.active { background: var(--white); color: var(--teal-dark); border-color: var(--white); }
-    .platform-tab .soon-badge {
-      font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em;
-      background: rgba(255,255,255,0.2); padding: 0.15rem 0.4rem; border-radius: 4px;
-      margin-left: 0.4rem; vertical-align: middle;
-    }
-    .platform-tab.active .soon-badge { background: rgba(13,148,136,0.15); color: var(--teal-dark); }
     .install-command {
       max-width: 600px; margin: 0 auto 1.5rem;
       background: var(--gray-900); border-radius: 12px; overflow: hidden;
@@ -387,28 +238,22 @@
     }
     .install-command .copy-btn:hover { background: rgba(255,255,255,0.2); }
     .install-command .copy-btn.copied { background: rgba(16,185,129,0.3); border-color: rgba(16,185,129,0.4); }
-    .platform-content { display: none; }
-    .platform-content.active { display: block; }
-    .platform-coming-soon {
-      font-size: 1.1rem; opacity: 0.85; margin-bottom: 1.5rem; line-height: 1.6;
-    }
     .install-links {
       display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;
     }
     .install-note { margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.7; }
 
+    /* ── Footer ── */
     footer {
       padding: 3rem 2rem; text-align: center; color: var(--gray-400); font-size: 0.9rem;
+      background: var(--gray-900);
     }
+    footer a { color: var(--gray-400); text-decoration: none; margin: 0 0.75rem; }
+    footer a:hover { color: var(--teal-light); }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .paths-grid { grid-template-columns: 1fr; }
-      .cost-grid { grid-template-columns: 1fr; }
-      .earn-steps { grid-template-columns: 1fr; }
-      .earnings-grid { grid-template-columns: 1fr; }
-      .features-grid { grid-template-columns: 1fr; }
-      section { padding: 4rem 1.5rem; }
+      .how-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .hero { padding: 6rem 1.5rem 3rem; }
@@ -421,8 +266,7 @@
   <nav>
     <a href="/" class="logo">teale</a>
     <div class="nav-links">
-      <a href="#use">Use AI</a>
-      <a href="#earn">Earn</a>
+      <a href="#how">How It Works</a>
       <a href="#developers">Developers</a>
       <a href="/stats">Network</a>
       <a href="/docs/">Docs</a>
@@ -432,14 +276,16 @@
 
   <!-- ── Hero ── -->
   <section class="hero">
-    <h1>AI for <span class="highlight">everyone.</span></h1>
-    <p class="subtitle">Everyone uses AI. Not everyone can afford $20&ndash;$200 a month for it. Teale makes AI free to run on your own Mac &mdash; or 100x cheaper than OpenAI on the network. And if you have a Mac sitting idle, it pays you.</p>
+    <h1>AI <span class="highlight">free forever.</span>*</h1>
+    <p class="subtitle">
+      Install Teale on your Mac. Use AI whenever you want. When you're not using it, your Mac helps others on the network. That's the deal &mdash; and it's the only one where everyone wins.
+    </p>
     <div class="hero-ctas">
       <a href="#download" class="btn btn-primary btn-large">Install on Mac</a>
       <a href="#developers" class="btn btn-dark btn-large">Get API Access</a>
     </div>
+    <p class="hero-asterisk">*As long as your device contributes inference to the network, your AI usage with that model is 100% free. You use AI 8&ndash;12 hours a day. Your Mac serves others the rest. Everyone gets AI. No one pays.</p>
   </section>
-
 
   <!-- ── Stats Teaser ── -->
   <div class="stats-teaser">
@@ -450,69 +296,35 @@
       <span class="arrow">&rarr;</span>
     </a>
   </div>
-  <!-- ── Two Paths ── -->
-  <section id="use" class="paths-section">
-    <div class="paths-grid">
 
-      <div class="path-card use-ai">
-        <div class="path-label">Use AI</div>
-        <h2>Run it yourself. Completely free.</h2>
-        <p>Install Teale on your Mac and download any open model. It runs locally on your hardware &mdash; no internet, no subscription, no data leaving your machine. Ever.</p>
-        <ul>
-          <li>Llama, Qwen, Mistral, Gemma &mdash; all built in</li>
-          <li>Runs 100% locally on Apple Silicon</li>
-          <li>No account, no login, no tracking</li>
-          <li>Works completely offline</li>
-        </ul>
-        <div class="path-price">$0</div>
-        <div class="path-price-note">Free forever. Just your Mac and electricity.</div>
-        <a href="#download" class="btn btn-primary btn-large" style="align-self:flex-start">Install Teale</a>
-      </div>
-
-      <div class="path-card earn">
-        <div class="path-label">Earn Money</div>
-        <h2>Your Mac earns while you sleep.</h2>
-        <p>When you're not using your Mac, Teale serves AI requests from the network. You get paid for every request. More powerful hardware earns more.</p>
-        <ul>
-          <li>Runs only when you're idle</li>
-          <li>Smart throttling &mdash; respects thermals and battery</li>
-          <li>8 GB Mac: ~$10/mo &bull; 16 GB: ~$25/mo</li>
-          <li>36 GB+: ~$60/mo and up</li>
-        </ul>
-        <div class="path-price">$10&ndash;$60+</div>
-        <div class="path-price-note">Per month, passively. Just leave it running.</div>
-        <a href="#download" class="btn btn-dark btn-large" style="align-self:flex-start">Start Earning</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── Pricing ── -->
-  <section id="pricing" class="cost-section">
+  <!-- ── How It Works ── -->
+  <section id="how" class="how-section">
     <div class="section-center">
       <div class="section-header">
-        <h2>What AI actually costs</h2>
-        <p>The big providers charge $20&ndash;$200/month. We think that prices a lot of people out. Here's what the same AI costs on Teale.</p>
+        <h2>How it works</h2>
+        <p>One app. Three things happen.</p>
       </div>
-      <div class="cost-grid">
-        <div class="cost-card them">
-          <div class="provider">ChatGPT / Claude</div>
-          <div class="price">$20</div>
-          <div class="unit">per month (or $200 for Pro)</div>
-          <div class="desc">Monthly subscription. Needs an account, credit card, internet.</div>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-step-num">1</div>
+          <h3>Install Teale</h3>
+          <p>One command. Runs as a menu bar app. Detects your hardware, downloads a model that fits.</p>
         </div>
-        <div class="cost-card free">
-          <div class="provider">Teale &mdash; Local</div>
-          <div class="price">$0</div>
-          <div class="unit">forever</div>
-          <div class="desc">Download the app, pick a model, start chatting. Runs on your Mac. No internet needed.</div>
+        <div class="how-step">
+          <div class="how-step-num">2</div>
+          <h3>Use AI for free</h3>
+          <p>Chat, code, create. Models run locally on your Mac. No internet, no account, no limits.</p>
         </div>
-        <div class="cost-card network">
-          <div class="provider">Teale &mdash; Network</div>
-          <div class="price">$0.05</div>
-          <div class="unit">per 1M tokens</div>
-          <div class="desc">Access larger models across the network. $1 gets you 20 million tokens. No subscription.</div>
+        <div class="how-step">
+          <div class="how-step-num">3</div>
+          <h3>Your Mac helps others</h3>
+          <p>When you're idle, your Mac serves requests from the network. That's what keeps your AI free.</p>
         </div>
+      </div>
+
+      <div class="how-deal">
+        <h3>The deal: <span class="teal">you contribute, you use AI free.</span></h3>
+        <p>You use AI maybe 8&ndash;12 hours a day. The other 12&ndash;16 hours, your Mac is idle. Teale uses that idle time to serve inference for others on the network. In exchange, your usage is free. The more people who join, the more supply there is, the better it works for everyone. No subscription. No corporation taking a cut. Just people sharing compute.</p>
       </div>
     </div>
   </section>
@@ -521,8 +333,8 @@
   <section id="developers" class="demo-section">
     <div class="section-center">
       <div class="section-header">
-        <h2>For developers: compute in 30 seconds</h2>
-        <p>No account. No credit card. No approval queue. Deposit USDC, get an API key, hit the endpoint. OpenAI-compatible &mdash; change one line of code.</p>
+        <h2>For developers</h2>
+        <p>OpenAI-compatible API. No account. No approval queue. Change one line of code.</p>
       </div>
       <div class="terminal">
         <div class="terminal-bar">
@@ -531,108 +343,21 @@
         </div>
         <div class="terminal-body">
           <div class="terminal-step">
-            <div class="step-label">Step 1 &mdash; Get your key</div>
-            <span class="prompt">$</span> <span class="cmd">curl</span> <span class="flag">-X POST</span> <span class="string">https://api.teale.com/v1/keys/create</span> \<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-d</span> <span class="string">'{"wallet_address": "0xYOUR_WALLET"}'</span><br>
-            <br>
-            <span class="output">{"api_key": "sk-teale-a1b2c3...", "message": "Send USDC to fund your account"}</span>
-          </div>
-          <div class="terminal-step">
-            <div class="step-label">Step 2 &mdash; Fund with USDC on Base (any amount)</div>
-            <span class="comment"># Send USDC to the deposit address from your wallet.</span><br>
-            <span class="comment"># $1 = 20 million tokens. Balance credited in ~15 seconds.</span>
-          </div>
-          <div class="terminal-step">
-            <div class="step-label">Step 3 &mdash; Drop-in OpenAI replacement</div>
-            <span class="prompt">$</span> <span class="cmd">curl</span> <span class="string">https://api.teale.com/v1/chat/completions</span> \<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-H</span> <span class="string">"Authorization: Bearer sk-teale-a1b2c3..."</span> \<br>
+            <div class="step-label">Local &mdash; free, runs on your Mac</div>
+            <span class="prompt">$</span> <span class="cmd">curl</span> <span class="string">http://localhost:11434/v1/chat/completions</span> \<br>
             &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-d</span> <span class="string">'{"model": "llama-3.1-8b", "messages": [{"role": "user", "content": "Hello"}]}'</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-d</span> <span class="string">'{"model": "qwen3-8b", "messages": [{"role": "user", "content": "Hello"}]}'</span><br>
             <br>
             <span class="output">{"choices": [{"message": {"content": "Hello! How can I help you today?"}}]}</span>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Earn Details ── -->
-  <section id="earn" class="earn-section">
-    <div class="section-center">
-      <div class="section-header">
-        <h2>Passive income from your Mac</h2>
-        <p>Three steps. No configuration. Leave it running and check your earnings.</p>
-      </div>
-      <div class="earn-steps">
-        <div class="earn-step">
-          <div class="earn-step-num">1</div>
-          <h3>Install Teale</h3>
-          <p>Lightweight menu bar app. Detects your hardware automatically.</p>
-        </div>
-        <div class="earn-step">
-          <div class="earn-step-num">2</div>
-          <h3>Leave It Running</h3>
-          <p>Only uses your Mac when you're idle. Respects thermals, battery, activity.</p>
-        </div>
-        <div class="earn-step">
-          <div class="earn-step-num">3</div>
-          <h3>Get Paid</h3>
-          <p>Earn for every request. More RAM and faster chips earn more.</p>
-        </div>
-      </div>
-      <div class="earnings-grid">
-        <div class="earning-card">
-          <div class="device">MacBook Air / Pro</div>
-          <div class="chip">M1 / M2 / M3</div>
-          <div class="ram">8 GB Unified Memory</div>
-          <div class="amount">$10</div>
-          <div class="period">per month</div>
-        </div>
-        <div class="earning-card">
-          <div class="device">MacBook Air / Pro</div>
-          <div class="chip">M2 / M3 / M4</div>
-          <div class="ram">16 GB Unified Memory</div>
-          <div class="amount">$25</div>
-          <div class="period">per month</div>
-        </div>
-        <div class="earning-card">
-          <div class="device">MacBook Pro / Mac Mini</div>
-          <div class="chip">M3 Pro / M4 Pro</div>
-          <div class="ram">36 GB Unified Memory</div>
-          <div class="amount">$60</div>
-          <div class="period">per month</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Features ── -->
-  <section class="features-section">
-    <div class="section-center">
-      <div class="section-header">
-        <h2>Built for Apple Silicon</h2>
-        <p>Native performance. Zero compromise on your workflow.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">&#9889;</div>
-          <h3>Adaptive Throttling</h3>
-          <p>Scales down when you're active, ramps up when idle. Respects thermal limits, battery, and Low Power Mode.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128274;</div>
-          <h3>Private &amp; Secure</h3>
-          <p>End-to-end encrypted. Cryptographic node identity. Your data stays on your machine.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#127760;</div>
-          <h3>Global P2P Network</h3>
-          <p>Direct peer-to-peer via QUIC with automatic NAT traversal. No ports to configure.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#128640;</div>
-          <h3>Multi-Device Clusters</h3>
-          <p>Pool multiple Macs via Thunderbolt or LAN to run massive models no single device could handle.</p>
+          <div class="terminal-step">
+            <div class="step-label">Network &mdash; bigger models, pennies per million tokens</div>
+            <span class="prompt">$</span> <span class="cmd">curl</span> <span class="string">https://api.teale.com/v1/chat/completions</span> \<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-H</span> <span class="string">"Authorization: Bearer sk-teale-..."</span> \<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="flag">-d</span> <span class="string">'{"model": "llama-3.1-70b", "messages": [{"role": "user", "content": "Hello"}]}'</span><br>
+            <br>
+            <span class="comment"># $1 = 20 million tokens. Drop-in OpenAI replacement.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -641,96 +366,30 @@
   <!-- ── Install ── -->
   <section id="download" class="install-section">
     <h2>Get started in 10 seconds</h2>
-
-    <div class="platform-tabs">
-      <button class="platform-tab active" data-platform="macos">macOS</button>
-      <button class="platform-tab" data-platform="linux">Linux <span class="soon-badge">Soon</span></button>
-      <button class="platform-tab" data-platform="windows">Windows <span class="soon-badge">Soon</span></button>
-      <button class="platform-tab" data-platform="docker">Docker <span class="soon-badge">Soon</span></button>
-    </div>
-
-    <!-- macOS -->
-    <div class="platform-content active" data-platform="macos">
-      <div class="install-command">
-        <div class="install-command-header">Terminal</div>
-        <div class="install-command-body">
-          <code>curl -fsSL https://teale.com/install.sh | sh</code>
-          <button class="copy-btn" onclick="copyInstall(this)">Copy</button>
-        </div>
-      </div>
-      <p class="install-note">macOS 14 Sonoma or later &middot; Apple Silicon (M1+) &middot; Xcode required &middot; 100% free</p>
-      <div class="install-links">
-        <a href="https://github.com/teale-ai/teale-mac-app" class="btn btn-outline-light btn-large">View on GitHub</a>
+    <div class="install-command">
+      <div class="install-command-header">Terminal</div>
+      <div class="install-command-body">
+        <code>curl -fsSL https://teale.com/install.sh | sh</code>
+        <button class="copy-btn" onclick="copyInstall(this)">Copy</button>
       </div>
     </div>
-
-    <!-- Linux -->
-    <div class="platform-content" data-platform="linux">
-      <div class="install-command" style="opacity: 0.5;">
-        <div class="install-command-header">Terminal</div>
-        <div class="install-command-body">
-          <code>curl -fsSL https://teale.com/install.sh | sh</code>
-          <button class="copy-btn" disabled>Coming Soon</button>
-        </div>
-      </div>
-      <p class="platform-coming-soon">Linux support is in development. Star the repo to get notified.</p>
-      <div class="install-links">
-        <a href="https://github.com/teale-ai/teale-mac-app" class="btn btn-outline-light btn-large">Star on GitHub</a>
-      </div>
+    <div class="install-links">
+      <a href="https://github.com/teale-ai/teale-mac-app" class="btn btn-outline-light btn-large">View on GitHub</a>
     </div>
-
-    <!-- Windows -->
-    <div class="platform-content" data-platform="windows">
-      <p class="platform-coming-soon">Windows support is coming. Star the repo to get notified when it launches.</p>
-      <div class="install-links">
-        <a href="https://github.com/teale-ai/teale-mac-app" class="btn btn-outline-light btn-large">Star on GitHub</a>
-      </div>
-    </div>
-
-    <!-- Docker -->
-    <div class="platform-content" data-platform="docker">
-      <div class="install-command" style="opacity: 0.5;">
-        <div class="install-command-header">Terminal</div>
-        <div class="install-command-body">
-          <code>docker run -d teale/node</code>
-          <button class="copy-btn" disabled>Coming Soon</button>
-        </div>
-      </div>
-      <p class="platform-coming-soon">Docker image is in development. Star the repo to get notified.</p>
-      <div class="install-links">
-        <a href="https://github.com/teale-ai/teale-mac-app" class="btn btn-outline-light btn-large">Star on GitHub</a>
-      </div>
-    </div>
+    <p class="install-note">macOS 14+ &middot; Apple Silicon &middot; Free forever &middot; Open source</p>
   </section>
 
   <footer>
-    <p>&copy; 2026 Teale. Built with Claude.</p>
+    <p>
+      <a href="/docs/">Docs</a>
+      <a href="/stats">Network</a>
+      <a href="https://github.com/teale-ai">GitHub</a>
+      <a href="/switch/">Switch from Claude/OpenAI</a>
+    </p>
+    <p style="margin-top:0.75rem">&copy; 2026 Teale. Built with Claude.</p>
   </footer>
 
   <script>
-    // Platform tab switching
-    document.querySelectorAll('.platform-tab').forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        var platform = tab.dataset.platform;
-        document.querySelectorAll('.platform-tab').forEach(function(t) { t.classList.remove('active'); });
-        document.querySelectorAll('.platform-content').forEach(function(c) { c.classList.remove('active'); });
-        tab.classList.add('active');
-        document.querySelector('.platform-content[data-platform="' + platform + '"]').classList.add('active');
-      });
-    });
-
-    // Auto-detect platform
-    (function() {
-      var ua = navigator.userAgent.toLowerCase();
-      var detected = 'macos';
-      if (ua.indexOf('linux') !== -1 && ua.indexOf('android') === -1) detected = 'linux';
-      else if (ua.indexOf('windows') !== -1 || ua.indexOf('win64') !== -1 || ua.indexOf('win32') !== -1) detected = 'windows';
-
-      var tab = document.querySelector('.platform-tab[data-platform="' + detected + '"]');
-      if (tab) tab.click();
-    })();
-
-    // Copy button
     function copyInstall(btn) {
       var code = btn.parentElement.querySelector('code').textContent;
       navigator.clipboard.writeText(code).then(function() {
