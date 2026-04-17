@@ -223,13 +223,13 @@
       </div>
       <div class="stat-card">
         <div class="stat-icon">&#128176;</div>
-        <div class="stat-value" id="stat-earned">$38.4K</div>
-        <div class="stat-label">Earned by Contributors</div>
+        <div class="stat-value" id="stat-earned">38.4M</div>
+        <div class="stat-label">Credits Earned by Contributors</div>
       </div>
     </div>
 
     <div class="stats-cta">
-      <p>Join the network. Run AI for free, or earn money sharing your idle Mac.</p>
+      <p>Join the network. Run AI for free, or earn Teale Credits by sharing your idle device.</p>
       <div class="cta-buttons">
         <a href="/#download" class="btn btn-primary">Download Teale</a>
         <a href="/#developers" class="btn btn-outline">Get API Access</a>
@@ -267,7 +267,7 @@
         document.getElementById('stat-tokens').textContent = formatNumber(data.tokensServed);
         document.getElementById('stat-requests').textContent = formatNumber(data.requestsServed);
         document.getElementById('stat-models').textContent = data.modelsAvailable.toLocaleString();
-        document.getElementById('stat-earned').textContent = formatUSDC(data.earnedUSDC);
+        document.getElementById('stat-earned').textContent = formatNumber(data.creditsEarned || data.earnedCredits || data.earnedUSDC * 1000);
       } catch {
         // Keep static fallback values on error
       }
