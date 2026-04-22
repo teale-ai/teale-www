@@ -3,419 +3,202 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenClaw + Teale — Keep chatting, no subscription needed</title>
-  <meta name="description" content="OpenClaw blocked from Claude? Switch to Teale in 30 seconds. Free local inference, OpenAI-compatible API, no gatekeepers.">
-  <meta property="og:title" content="OpenClaw + Teale — Keep chatting, no subscription needed">
-  <meta property="og:description" content="OpenClaw blocked from Claude? Switch to Teale in 30 seconds. Free local inference, no gatekeepers.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://teale.com/openclaw">
+  <title>Teale — For OpenClaw</title>
+  <meta name="description" content="OpenClaw still works. Point it at Teale — an OpenAI-compatible API backed by the world's idle laptops.">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="1024x1024" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
   <style>
-    :root {
-      --teal: #0d9488;
-      --teal-light: #14b8a6;
-      --teal-dark: #0f766e;
-      --teal-50: #f0fdfa;
-      --teal-100: #ccfbf1;
-      --gray-900: #0f172a;
-      --gray-800: #1e293b;
-      --gray-700: #334155;
-      --gray-400: #94a3b8;
-      --white: #ffffff;
-    }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
-      color: var(--gray-900);
-      background: var(--white);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+    :root {
+      --bg: #0f172a;
+      --teal: #14b8a6;
+      --muted: #94a3b8;
+      --dim: #475569;
+      --codebg: #111c33;
     }
 
-    nav {
-      position: fixed; top: 0; width: 100%;
-      padding: 1rem 2rem;
-      display: flex; justify-content: space-between; align-items: center;
-      z-index: 100;
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      background: rgba(255,255,255,0.85);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+    html, body { min-height: 100vh; }
+
+    body {
+      background: var(--bg);
+      color: var(--teal);
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', ui-monospace, Menlo, monospace;
+      font-size: 1rem;
+      line-height: 1.7;
+      padding: 4rem 2rem 6rem;
+      -webkit-font-smoothing: antialiased;
     }
-    .logo { font-size: 1.5rem; font-weight: 700; color: var(--teal); text-decoration: none; letter-spacing: -0.02em; }
-    .nav-links { display: flex; gap: 2rem; align-items: center; }
-    .nav-links a { text-decoration: none; color: var(--gray-700); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--teal); }
+
+    main {
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 3rem;
+    }
+    .eyebrow a { color: var(--muted); text-decoration: none; transition: color 0.15s ease; }
+    .eyebrow a:hover { color: var(--teal); }
+    .eyebrow .current { color: var(--teal); }
+    .eyebrow .sep { margin: 0 0.35rem; opacity: 0.6; }
+
+    p { margin-bottom: 1.2rem; }
+
+    .muted { color: var(--muted); }
+
+    h2 {
+      font-size: 0.85rem;
+      font-weight: normal;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 3rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--dim);
+    }
+
+    pre {
+      background: var(--codebg);
+      border: 1px solid var(--dim);
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+      color: var(--teal);
+    }
+
+    code { font-family: inherit; }
+
+    .inline-code {
+      background: var(--codebg);
+      padding: 0.1rem 0.4rem;
+      border: 1px solid var(--dim);
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
+    a.link { color: var(--teal); }
+    a.link:hover { text-decoration: underline; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.6rem 0.5rem;
+      border-bottom: 1px dashed var(--dim);
+    }
+
+    th {
+      font-weight: normal;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    td { color: var(--teal); }
+    td:not(:first-child), th:not(:first-child) { text-align: right; }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
 
     .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.7rem 1.5rem; border-radius: 10px;
-      font-size: 0.95rem; font-weight: 600;
-      text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
-    }
-    .btn-primary { background: var(--teal); color: var(--white); }
-    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13,148,136,0.3); }
-    .btn-dark { background: var(--gray-900); color: var(--white); }
-    .btn-dark:hover { background: var(--gray-800); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    .btn-outline-light { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.25); }
-    .btn-outline-light:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
-    .btn-white { background: var(--white); color: var(--teal-dark); }
-    .btn-white:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-    .btn-large { padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 14px; }
-
-    /* ── Hero ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      text-align: center;
-      padding: 8rem 2rem 5rem;
-      background: var(--gray-900); color: var(--white);
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: -40% -20%;
-      background: radial-gradient(ellipse at 30% 20%, rgba(13,148,136,0.15) 0%, transparent 60%),
-                  radial-gradient(ellipse at 70% 80%, rgba(20,184,166,0.1) 0%, transparent 50%);
-      z-index: 0;
-    }
-    .hero > * { position: relative; z-index: 1; }
-
-    .hero-badge {
-      display: inline-block;
-      padding: 0.4rem 1rem; border-radius: 999px;
-      font-size: 0.8rem; font-weight: 600;
-      background: rgba(13,148,136,0.2); color: var(--teal-light);
-      border: 1px solid rgba(13,148,136,0.3);
-      margin-bottom: 2rem; letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      font-family: inherit;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 1px solid var(--teal);
+      transition: background 0.15s ease, color 0.15s ease;
+      cursor: pointer;
     }
 
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;
-      max-width: 800px; margin-bottom: 1.5rem;
-    }
-    .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--teal), var(--teal-light));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .hero .subtitle {
-      font-size: clamp(1.05rem, 2vw, 1.3rem);
-      color: var(--gray-400); max-width: 620px; line-height: 1.7; margin-bottom: 2.5rem;
-    }
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn-primary { background: var(--teal); color: var(--bg); }
+    .btn-primary:hover { background: transparent; color: var(--teal); }
 
-    /* ── Section helpers ── */
-    section { padding: 5rem 2rem; }
-    .section-center { max-width: 1100px; margin: 0 auto; }
-    .section-header { text-align: center; margin-bottom: 3.5rem; }
-    .section-header h2 {
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800;
-      letter-spacing: -0.02em; margin-bottom: 1rem;
-    }
-    .section-header p {
-      font-size: 1.1rem; color: var(--gray-700);
-      max-width: 600px; margin: 0 auto; line-height: 1.6;
-    }
+    .btn-secondary { background: transparent; color: var(--teal); }
+    .btn-secondary:hover { background: var(--teal); color: var(--bg); }
 
-    /* ── Migration ── */
-    .migrate-section { background: var(--white); }
-
-    .terminal {
-      max-width: 700px; margin: 0 auto;
-      background: var(--gray-800); border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.08);
-      overflow: hidden;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-    }
-    .terminal-bar {
-      display: flex; align-items: center; gap: 6px;
-      padding: 12px 16px;
-      background: rgba(0,0,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .terminal-bar span { width: 12px; height: 12px; border-radius: 50%; }
-    .terminal-bar span:nth-child(1) { background: #ff5f57; }
-    .terminal-bar span:nth-child(2) { background: #febc2e; }
-    .terminal-bar span:nth-child(3) { background: #28c840; }
-    .terminal-bar .title { flex:1; text-align:center; font-size:0.75rem; color:var(--gray-400); font-weight:500; }
-
-    .terminal-body {
-      padding: 1.5rem;
-      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
-      font-size: 0.85rem; line-height: 2; color: var(--gray-400);
-    }
-    .terminal-body .prompt { color: var(--teal-light); }
-    .terminal-body .cmd { color: var(--white); }
-    .terminal-body .flag { color: #c084fc; }
-    .terminal-body .string { color: #fbbf24; }
-    .terminal-body .comment { color: #475569; }
-    .terminal-body .output { color: var(--teal-light); }
-
-    .terminal-step {
-      margin-bottom: 1.2rem; padding-bottom: 1.2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    .terminal-step:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
-    .terminal-step .step-label {
-      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--teal); font-weight: 700; margin-bottom: 0.5rem;
-      font-family: -apple-system, system-ui, sans-serif;
-    }
-
-    .migrate-note {
-      text-align: center; margin-top: 2rem;
-      font-size: 0.9rem; color: var(--gray-400); line-height: 1.7;
-      max-width: 560px; margin-left: auto; margin-right: auto;
-    }
-    .migrate-note a { color: var(--teal); text-decoration: none; }
-    .migrate-note a:hover { text-decoration: underline; }
-
-    /* ── What You Get ── */
-    .benefits-section { background: var(--teal-50); }
-    .benefits-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
-      max-width: 800px; margin: 0 auto;
-    }
-    .benefit-card {
-      background: var(--white); border-radius: 16px; padding: 2rem;
-      border: 1px solid rgba(0,0,0,0.06); transition: all 0.2s;
-    }
-    .benefit-card:hover { border-color: var(--teal); box-shadow: 0 4px 20px rgba(13,148,136,0.1); }
-    .benefit-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .benefit-card p { color: var(--gray-700); line-height: 1.6; font-size: 0.95rem; }
-    .benefit-icon {
-      width: 44px; height: 44px; border-radius: 12px;
-      background: var(--teal-50); border: 2px solid var(--teal-100);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; margin-bottom: 1rem;
-    }
-
-    /* ── Comparison ── */
-    .compare-section { background: var(--white); }
-    .compare-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-      max-width: 800px; margin: 0 auto;
-    }
-    .compare-card {
-      border-radius: 16px; padding: 2.5rem 2rem;
-    }
-    .compare-card.old {
-      background: #fef2f2; border: 2px solid #fecaca;
-    }
-    .compare-card.new {
-      background: var(--teal-50); border: 2px solid var(--teal-100);
-    }
-    .compare-card .label {
-      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.1em; margin-bottom: 1rem;
-    }
-    .compare-card.old .label { color: #dc2626; }
-    .compare-card.new .label { color: var(--teal-dark); }
-    .compare-card h3 {
-      font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem;
-      letter-spacing: -0.01em;
-    }
-    .compare-card ul {
-      list-style: none; font-size: 0.95rem; line-height: 2.2;
-      color: var(--gray-700);
-    }
-    .compare-card.old ul li::before {
-      content: '\2717'; margin-right: 0.6rem; font-weight: 700; color: #dc2626;
-    }
-    .compare-card.new ul li::before {
-      content: '\2713'; margin-right: 0.6rem; font-weight: 700; color: var(--teal);
-    }
-
-    /* ── CTA ── */
-    .cta-section {
-      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
-      color: var(--white); text-align: center; padding: 6rem 2rem;
-    }
-    .cta-section h2 {
-      font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
-      letter-spacing: -0.02em; margin-bottom: 1rem;
-    }
-    .cta-section p {
-      font-size: 1.15rem; opacity: 0.9;
-      max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.6;
-    }
-    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .cta-note { margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.7; }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center; padding: 2rem;
-      color: var(--gray-400); font-size: 0.85rem;
-      background: var(--gray-900);
-    }
-    footer a { color: var(--gray-400); text-decoration: none; }
-    footer a:hover { color: var(--teal-light); }
-
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .compare-grid, .benefits-grid { grid-template-columns: 1fr; }
-      .hero-ctas, .cta-buttons { flex-direction: column; align-items: center; }
+    @media (max-width: 480px) {
+      body { padding: 2rem 1.25rem 4rem; font-size: 0.95rem; }
+      .eyebrow { font-size: 0.75rem; }
+      .eyebrow .sep { margin: 0 0.25rem; }
+      h2 { font-size: 0.75rem; }
+      pre { font-size: 0.8rem; padding: 0.75rem 1rem; }
+      table { font-size: 0.85rem; }
+      th, td { padding: 0.5rem 0.3rem; }
+      .actions { flex-direction: column; gap: 0.75rem; }
+      .btn { width: 100%; }
     }
   </style>
 </head>
 <body>
-
-  <nav>
-    <a href="/" class="logo">teale</a>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/docs/">Docs</a>
-      <a href="/switch/">Other Clients</a>
-      <a href="#migrate" class="btn btn-primary">Switch Now</a>
-    </div>
-  </nav>
-
-  <!-- ── Hero ── -->
-  <section class="hero">
-    <div class="hero-badge">For OpenClaw users</div>
-    <h1>OpenClaw still works. <br><span class="highlight">Just point it at Teale.</span></h1>
-    <p class="subtitle">
-      Anthropic blocked third-party clients from using Claude subscriptions. But OpenClaw doesn't need Claude &mdash; it works with any OpenAI-compatible API. Teale gives you one for free, running on your own Mac.
+  <main>
+    <p class="eyebrow">
+      <a href="/">Teale</a> ∙ <a href="/">manifesto</a>
+      <span class="sep">|</span> <a href="/openclaw/" class="current">for OpenClaw</a>
+      <span class="sep">|</span> <a href="/hermes-agent/">for Hermes</a>
+      <span class="sep">|</span> <a href="/developers/">for Developers</a>
     </p>
-    <div class="hero-ctas">
-      <a href="#migrate" class="btn btn-white btn-large">3-step migration guide</a>
-      <a href="https://github.com/teale-ai/teale-mac-app" class="btn btn-outline-light btn-large">View source on GitHub</a>
+
+    <p>OpenClaw still works. Point it at Teale.</p>
+
+    <p class="muted">OpenClaw needs an OpenAI-compatible API — not Claude specifically. Teale gives you one, backed by the world's idle laptops. No subscription, no rate limits, no account.</p>
+
+    <h2>Reliable supply</h2>
+    <p class="muted">Most devices on the network run a unified Hermes-3-Llama 3.1 8B. Your OpenClaw requests route to whichever laptop is free — same model, consistent outputs, no cold starts.</p>
+
+    <h2>Performance</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>TTFT</th>
+          <th>TPS</th>
+          <th>Credits / 1M</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Hermes-3-Llama 3.1 8B</td><td>~200ms</td><td>~45</td><td>800</td></tr>
+        <tr><td>Qwen 3 32B</td><td>~350ms</td><td>~18</td><td>3,200</td></tr>
+        <tr><td>Llama 4 Scout 109B MoE</td><td>~500ms</td><td>~12</td><td>10,900</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Illustrative figures. Live metrics stream from <a href="https://gateway.teale.com" class="link" target="_blank" rel="noopener">gateway.teale.com</a>.</p>
+
+    <h2>Switch in one step</h2>
+    <p class="muted">In OpenClaw, set the base URL to Teale. That's it.</p>
+    <pre><code>export OPENAI_BASE_URL="https://gateway.teale.com/v1"
+export OPENAI_API_KEY="tlc_..."</code></pre>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://github.com/teale-ai/teale-mac-app/releases/latest">Download for Mac</a>
+      <a class="btn btn-secondary" href="/docs/">Read the docs</a>
     </div>
-  </section>
-
-  <!-- ── Migration ── -->
-  <section id="migrate" class="migrate-section">
-    <div class="section-center">
-      <div class="section-header">
-        <h2>Switch OpenClaw to Teale in 30 seconds</h2>
-        <p>Install Teale, change one setting in OpenClaw, done.</p>
-      </div>
-
-      <div class="terminal">
-        <div class="terminal-bar">
-          <span></span><span></span><span></span>
-          <div class="title">OpenClaw + Teale setup</div>
-        </div>
-        <div class="terminal-body">
-          <div class="terminal-step">
-            <div class="step-label">1. Install Teale (one command)</div>
-            <span class="prompt">$</span> <span class="cmd">curl</span> <span class="flag">-fsSL</span> <span class="string">https://teale.com/install.sh</span> <span class="cmd">| sh</span><br>
-            <span class="comment"># Installs the Teale app and starts a local API server</span><br>
-            <span class="comment"># Look for the brain icon in your menu bar</span><br>
-            <span class="output">Teale installed. API running at http://localhost:11434</span>
-          </div>
-          <div class="terminal-step">
-            <div class="step-label">2. Change one setting in OpenClaw</div>
-            <span class="comment"># Open OpenClaw &rarr; Settings &rarr; API Configuration</span><br>
-            <span class="comment"># Change the API endpoint:</span><br>
-            <br>
-            <span class="comment"># Old:</span> <span class="cmd" style="text-decoration:line-through;opacity:0.5">https://api.anthropic.com/v1</span><br>
-            <span class="comment"># New:</span> <span class="string">http://localhost:11434/v1</span><br>
-            <br>
-            <span class="comment"># Set API key to any non-empty string (e.g. "teale")</span><br>
-            <span class="comment"># OpenClaw works with any OpenAI-compatible endpoint.</span>
-          </div>
-          <div class="terminal-step">
-            <div class="step-label">3. Chat like nothing changed</div>
-            <span class="comment"># Your conversations, presets, and system prompts all carry over.</span><br>
-            <span class="comment"># Models run on your Mac. No subscription. No rate limits.</span><br>
-            <span class="comment"># No one can revoke your access.</span><br>
-            <br>
-            <span class="output">Ready. Using Llama 3.1 8B on local hardware.</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="migrate-note">
-        Want access to larger models your Mac can't run locally?<br>
-        Teale's network has them for <strong>$0.05 per million tokens</strong>.<br>
-        <a href="/docs/getting-started/quickstart-api/">See the network quickstart &rarr;</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Comparison ── -->
-  <section class="compare-section">
-    <div class="section-center">
-      <div class="section-header">
-        <h2>What changed &mdash; and what didn't</h2>
-        <p>OpenClaw is the same great client. You just need a backend that doesn't gatekeep.</p>
-      </div>
-      <div class="compare-grid">
-        <div class="compare-card old">
-          <div class="label">OpenClaw + Claude subscription</div>
-          <h3>What you had</h3>
-          <ul>
-            <li>$20/month for rate-limited access</li>
-            <li>Anthropic decides which clients are allowed</li>
-            <li>Access revoked overnight, no warning</li>
-            <li>Usage data visible to provider</li>
-            <li>No API access without separate paid plan</li>
-          </ul>
-        </div>
-        <div class="compare-card new">
-          <div class="label">OpenClaw + Teale</div>
-          <h3>What you get</h3>
-          <ul>
-            <li>$0 for local models, $0.05/M tokens on network</li>
-            <li>Use any client you want &mdash; it's your hardware</li>
-            <li>No one can shut off your access</li>
-            <li>E2E encrypted &mdash; no one reads your prompts</li>
-            <li>Full API included, same OpenAI format</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Benefits ── -->
-  <section class="benefits-section">
-    <div class="section-center">
-      <div class="section-header">
-        <h2>Why OpenClaw users love Teale</h2>
-      </div>
-      <div class="benefits-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon">&#x26a1;</div>
-          <h3>Instant, offline chat</h3>
-          <p>Models run on your Mac. No internet needed for local inference. Responses start in milliseconds, not seconds.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">&#x1f513;</div>
-          <h3>No more gatekeepers</h3>
-          <p>Teale is open source and decentralized. No company can decide which clients are "allowed" to use AI.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">&#x1f4b0;</div>
-          <h3>Actually free</h3>
-          <p>Not "free tier with limits." Free as in runs on your hardware. Larger models on the network cost $0.05 per million tokens.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">&#x1f512;</div>
-          <h3>Private by default</h3>
-          <p>Local inference never leaves your machine. Network traffic is Noise-encrypted end-to-end. Your prompts are yours.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CTA ── -->
-  <section class="cta-section">
-    <h2>Keep using OpenClaw. Ditch the subscription.</h2>
-    <p>One install command. One settings change. You're back up in 30 seconds, on infrastructure no one can take away.</p>
-    <div class="cta-buttons">
-      <a href="https://teale.com/install.sh" onclick="navigator.clipboard.writeText('curl -fsSL https://teale.com/install.sh | sh')" class="btn btn-white btn-large">Install Teale</a>
-      <a href="https://github.com/teale-ai/teale-mac-app" class="btn btn-outline-light btn-large">View Source on GitHub</a>
-    </div>
-    <p class="cta-note">macOS 14+ &middot; Apple Silicon &middot; 100% free &middot; 100% open source</p>
-  </section>
-
-  <footer>
-    <p><a href="/">teale.com</a> &middot; <a href="/docs/">Docs</a> &middot; <a href="/switch/">Other Clients</a> &middot; <a href="https://github.com/teale-ai">GitHub</a></p>
-    <p style="margin-top:0.5rem">&copy; 2026 Teale. Built with Claude.</p>
-  </footer>
-
+  </main>
 </body>
 </html>
