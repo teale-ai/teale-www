@@ -141,7 +141,7 @@
 
     <h2>Install the CLI</h2>
     <pre><code>curl -fsSL https://teale.com/install.sh | sh</code></pre>
-    <p class="muted" style="margin-top: -0.5rem; font-size: 0.9rem;">macOS and Linux. Windows: <a href="https://github.com/teale-ai/teale-mono/releases/download/teale-v2026.04.25.0053/Teale.exe" class="link">download Teale.exe</a> — the CLI ships bundled in the app. Early builds are unsigned; bypass SmartScreen on first launch.</p>
+    <p class="muted" style="margin-top: -0.5rem; font-size: 0.9rem;">macOS and Linux. Windows: <a href="https://github.com/teale-ai/teale-mono/releases/download/teale-v2026.04.25.0053/Teale.exe" data-platform="win" class="link">download Teale.exe</a> — the CLI ships bundled in the app. Early builds are unsigned; bypass SmartScreen on first launch.</p>
 
     <h2>Use any OpenAI SDK</h2>
     <pre><code>from openai import OpenAI
@@ -173,5 +173,6 @@ response = client.chat.completions.create(
       <a class="btn btn-secondary" href="https://gateway.teale.com" target="_blank" rel="noopener">Open gateway</a>
     </div>
   </main>
+  <script src="/auto-release.js" defer></script>
 </body>
 </html>
