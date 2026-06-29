@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teale - Distributed Inference for Local AI</title>
-  <meta name="description" content="Build on Teale's OpenAI-compatible API for distributed inference and local AI. Swap the base URL and route requests across the network.">
-  <meta property="og:title" content="Teale Developers - Distributed Inference API">
-  <meta property="og:description" content="Use OpenAI-compatible local AI models through Teale's distributed inference network.">
+  <meta name="description" content="Become a Teale provider and connect model supply to a distributed inference network for local AI through an OpenAI-compatible gateway.">
+  <meta property="og:title" content="Teale Providers - Distributed Inference Supply">
+  <meta property="og:description" content="Bring third-party model capacity to Teale's OpenAI-compatible distributed inference network.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://teale.com/developers/">
+  <meta property="og:url" content="https://teale.com/providers/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="1024x1024" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
@@ -67,21 +67,24 @@
       border-bottom: 1px solid var(--dim);
     }
 
-    h2:first-of-type { margin-top: 2rem; }
-
-    pre {
-      background: var(--codebg);
-      border: 1px solid var(--dim);
-      border-radius: 4px;
-      padding: 1rem 1.25rem;
-      overflow-x: auto;
-      font-size: 0.9rem;
-      line-height: 1.5;
+    ul {
+      list-style: none;
       margin-bottom: 1.2rem;
-      color: var(--teal);
     }
 
-    code { font-family: inherit; }
+    li {
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      padding-left: 1.4rem;
+      position: relative;
+    }
+
+    li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+    }
 
     .inline-code {
       background: var(--codebg);
@@ -90,9 +93,6 @@
       border-radius: 3px;
       font-size: 0.9em;
     }
-
-    a.link { color: var(--teal); }
-    a.link:hover { text-decoration: underline; }
 
     .actions {
       display: flex;
@@ -125,7 +125,6 @@
       .eyebrow { font-size: 0.75rem; }
       .eyebrow .sep { margin: 0 0.25rem; }
       h2 { font-size: 0.75rem; }
-      pre { font-size: 0.8rem; padding: 0.75rem 1rem; }
       .actions { flex-direction: column; gap: 0.75rem; }
       .btn { width: 100%; }
     }
@@ -137,47 +136,28 @@
       <a href="/">Teale</a> ∙ <a href="/">manifesto</a>
       <span class="sep">|</span> <a href="/openclaw/">for OpenClaw</a>
       <span class="sep">|</span> <a href="/hermes-agent/">for Hermes</a>
-      <span class="sep">|</span> <a href="/developers/" class="current">for Developers</a>
-      <span class="sep">|</span> <a href="/providers/">for Providers</a>
+      <span class="sep">|</span> <a href="/developers/">for Developers</a>
+      <span class="sep">|</span> <a href="/providers/" class="current">for Providers</a>
     </p>
 
-    <p>Teale is an OpenAI-compatible API backed by the world's idle laptops.</p>
-    <p>Install in one line. Swap the base URL. Point at <span class="inline-code">teale-auto</span> and let the compiler pick the right model for every request.</p>
+    <p>Bring your models to Teale.</p>
 
-    <h2>Install the CLI</h2>
-    <pre><code>curl -fsSL https://teale.com/install.sh | sh</code></pre>
-    <p class="muted" style="margin-top: -0.5rem; font-size: 0.9rem;">macOS and Linux via <span class="inline-code">install.sh</span>. Linux desktop: <a href="https://github.com/teale-ai/teale-mono/releases/download/teale-2026.04.29.1149/Teale-linux-x86_64.tar.gz" data-platform="linux" class="link">download the x86_64 tarball</a>. Windows: <a href="https://github.com/teale-ai/teale-mono/releases/download/teale-2026.04.29.1149/Teale.exe" data-platform="win" class="link">download Teale.exe</a> — the CLI ships bundled in the app. Early builds are unsigned; bypass SmartScreen on first launch.</p>
+    <p class="muted">Teale is opening its distributed inference network to third-party providers. If you operate model-serving capacity, specialized local AI models, or regional inference supply, Teale can make that capacity available through an OpenAI-compatible gateway.</p>
 
-    <h2>Use any OpenAI SDK</h2>
-    <pre><code>from openai import OpenAI
+    <h2>Provider fit</h2>
+    <ul>
+      <li>OpenAI-compatible model-serving endpoints.</li>
+      <li>Specialized open models, fine-tunes, or private model catalogs.</li>
+      <li>Reliable inference supply that can join a routed demand network.</li>
+    </ul>
 
-client = OpenAI(
-    base_url="https://gateway.teale.com/v1",
-    api_key="tok_...",
-)
-
-response = client.chat.completions.create(
-    model="meta-llama/llama-3.1-8b-instruct",
-    messages=[{"role": "user", "content": "Hello"}],
-)</code></pre>
-
-    <h2>Or let teale-auto pick the model</h2>
-    <p class="muted">teale-auto is a compiler that routes each request to the right model — small for simple prompts, large for reasoning, with fallbacks across the network.</p>
-    <pre><code>response = client.chat.completions.create(
-    model="teale-auto",
-    messages=[{"role": "user", "content": "Hello"}],
-)
-# → teale-auto routes to Hermes Llama 8B today; more models as supply scales.</code></pre>
-
-    <h2>Models</h2>
-    <p class="muted">Hermes Llama 8B is the primary served model today. More canonical OpenRouter-slug models are added as the network scales.</p>
-    <p class="muted">Pricing per model: <a href="/docs/" class="link">full docs →</a></p>
+    <h2>How it works</h2>
+    <p class="muted">Teale routes demand through <span class="inline-code">gateway.teale.com</span> and presents canonical model slugs to developers. Third-party providers can inquire about contributing supply, routing availability, pricing, and operational requirements.</p>
 
     <div class="actions">
-      <a class="btn btn-primary" href="/docs/">Read the docs</a>
-      <a class="btn btn-secondary" href="https://gateway.teale.com" target="_blank" rel="noopener">Open gateway</a>
+      <a class="btn btn-primary" href="mailto:ai@teale.com?subject=Teale%20provider%20inquiry">Email ai@teale.com</a>
+      <a class="btn btn-secondary" href="/developers/">View developer API</a>
     </div>
   </main>
-  <script src="/auto-release.js" defer></script>
 </body>
 </html>
