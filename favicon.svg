@@ -1,23 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <g stroke="#14b8a6" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 26 80
-             C 12 78 16 32 28 20
-             C 44 8 68 12 76 28
-             C 82 42 76 48 74 50
-             C 78 54 74 60 70 60
-             C 74 66 68 74 60 74
-             C 58 80 44 82 26 80 Z"/>
-    <g transform="translate(44 42)">
-      <path d="M -14 0
-               C -19 -8 -10 -15 -5 -12
-               C -3 -18 5 -18 7 -12
-               C 13 -15 20 -8 14 -1
-               C 18 4 14 12 8 10
-               C 9 15 -7 16 -8 10
-               C -14 12 -19 4 -14 0 Z"/>
-      <path d="M 1 -14 L 1 13" stroke-width="2.8" opacity="0.65"/>
-      <path d="M -9 -4 Q -5 -1 -7 3" stroke-width="2" opacity="0.55"/>
-      <path d="M 10 -4 Q 6 -1 8 3" stroke-width="2" opacity="0.55"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Teale resource leaf icon">
+  <defs>
+    <linearGradient id="leaf" x1="17" y1="109" x2="111" y2="18" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="0.48" stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#6ee7b7"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-12%" y="-12%" width="124%" height="124%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#052e2b" flood-opacity="0.28"/>
+    </filter>
+    <path id="leaf-shape" d="M20 104C15 79 21 54 38 35C55 16 81 8 111 17C116 48 108 75 88 93C69 110 42 116 20 104Z"/>
+    <clipPath id="inside-leaf">
+      <use href="#leaf-shape"/>
+    </clipPath>
+  </defs>
+
+  <use href="#leaf-shape" fill="url(#leaf)" filter="url(#soft-shadow)"/>
+  <path d="M20 104C15 79 21 54 38 35C55 16 81 8 111 17C116 48 108 75 88 93C69 110 42 116 20 104Z"
+        fill="none" stroke="#99f6e4" stroke-width="4" stroke-linejoin="round" opacity="0.9"/>
+
+  <g clip-path="url(#inside-leaf)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M29 99C48 75 69 50 106 21" stroke="#ecfeff" stroke-width="7"/>
+    <path d="M44 80C39 68 34 60 27 54" stroke="#ccfbf1" stroke-width="4"/>
+    <path d="M52 70C47 57 42 48 34 39" stroke="#ccfbf1" stroke-width="4"/>
+    <path d="M62 59C58 45 56 35 59 23" stroke="#ccfbf1" stroke-width="4"/>
+    <path d="M64 61C78 59 90 55 102 47" stroke="#ccfbf1" stroke-width="4"/>
+    <path d="M52 77C68 78 82 82 95 91" stroke="#ccfbf1" stroke-width="4"/>
+    <path d="M38 90C49 94 59 99 67 108" stroke="#ccfbf1" stroke-width="4"/>
+  </g>
+
+  <g fill="#ecfeff">
+    <circle cx="27" cy="54" r="4"/>
+    <circle cx="34" cy="39" r="4"/>
+    <circle cx="59" cy="23" r="4"/>
+    <circle cx="102" cy="47" r="4"/>
+    <circle cx="95" cy="91" r="4"/>
+    <circle cx="67" cy="108" r="4"/>
+    <circle cx="106" cy="21" r="4.5"/>
   </g>
 </svg>
