@@ -130,6 +130,61 @@
       color: var(--gray-400);
     }
 
+    /* ── Solvency / Proof of Reserves ── */
+    .solvency {
+      background: var(--gray-800);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 2.5rem 2rem;
+      margin-bottom: 4rem;
+    }
+    .solvency h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .solvency .solvency-sub {
+      text-align: center;
+      color: var(--gray-400);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 640px;
+      margin: 0 auto 2rem;
+    }
+    .solvency-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .solvency-item { text-align: center; }
+    .solvency-value {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--teal-light);
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+    }
+    .solvency-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-400);
+    }
+    .solvency-verify {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--gray-400);
+    }
+    .solvency-verify a { color: var(--teal-light); text-decoration: none; }
+    .solvency-verify a:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      .solvency-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+    }
+
     /* ── CTA ── */
     .stats-cta {
       text-align: center;
@@ -228,6 +283,26 @@
       </div>
     </div>
 
+    <section class="solvency" id="solvency" hidden>
+      <h2>Proof of Reserves</h2>
+      <p class="solvency-sub">Every Teale Credit is backed by USDC held in the network treasury on Solana. These numbers come straight from the gateway ledger and the chain - verify the treasury yourself.</p>
+      <div class="solvency-grid">
+        <div class="solvency-item">
+          <div class="solvency-value" id="solv-treasury">-</div>
+          <div class="solvency-label">USDC in Treasury</div>
+        </div>
+        <div class="solvency-item">
+          <div class="solvency-value" id="solv-outstanding">-</div>
+          <div class="solvency-label">Credits Outstanding</div>
+        </div>
+        <div class="solvency-item">
+          <div class="solvency-value" id="solv-coverage">-</div>
+          <div class="solvency-label">Coverage</div>
+        </div>
+      </div>
+      <p class="solvency-verify">Treasury: <a id="solv-explorer" href="#" target="_blank" rel="noopener">view on Solscan</a> &middot; withdrawals are processed manually within 72 hours</p>
+    </section>
+
     <div class="stats-cta">
       <p>Join the network. Run AI for free, or earn Teale Credits by sharing your idle device.</p>
       <div class="cta-buttons">
@@ -273,9 +348,31 @@
       }
     }
 
+    async function fetchSolvency() {
+      try {
+        const res = await fetch('https://gateway.teale.com/v1/solvency');
+        if (!res.ok) return;
+        const d = await res.json();
+
+        const outstandingUsd = d.totalLiabilitiesUsdcMicro / 1e6;
+        document.getElementById('solv-treasury').textContent = '$' + (d.treasuryUsdcMicro / 1e6).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        document.getElementById('solv-outstanding').textContent = formatNumber(d.outstandingCreditsTotal) + ' ($' + outstandingUsd.toFixed(2) + ')';
+        const pct = d.coverageRatio * 100;
+        document.getElementById('solv-coverage').textContent = pct.toFixed(1) + '%';
+        const link = document.getElementById('solv-explorer');
+        link.href = d.explorerUrl;
+        link.textContent = d.treasuryAddress.slice(0, 4) + '...' + d.treasuryAddress.slice(-4) + ' on Solscan';
+        document.getElementById('solvency').hidden = false;
+      } catch {
+        // Keep the section hidden on error - never show stale reserve numbers
+      }
+    }
+
     // Fetch immediately, then refresh every hour
     fetchStats();
+    fetchSolvency();
     setInterval(fetchStats, 60 * 60 * 1000);
+    setInterval(fetchSolvency, 5 * 60 * 1000);
   </script>
 
 </body>
